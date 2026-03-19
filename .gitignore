@@ -11,6 +11,8 @@ build/
 # Data
 data/*
 !data/.gitkeep
+!data/pollution
+!data/wind
 
 # --- Models & checkpoints ---
 *.pth
