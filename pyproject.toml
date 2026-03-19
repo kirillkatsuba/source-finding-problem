@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "source-finding-problem"
+version = "0.1.0"
+description = ""
+authors = ["Вячеслав Чертан <slavakemdev@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12, <3.15"
+torch = "^2.10.0"
+torchaudio = "^2.10.0"
+torchvision = "^0.25.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
