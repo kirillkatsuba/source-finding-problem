@@ -1,0 +1,44 @@
+# --- Python & Poetry ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+dist/
+build/
+
+# Data
+data/*
+!data/.gitkeep
+
+# --- Models & checkpoints ---
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.joblib
+*.pkl
+models/
+
+# --- Logs & exp tracking ---
+logs/
+*.log
+.events.*
+wandb/
+mlruns/
+lightning_logs/
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# --- Secrets ---
+.env
+.env.local
+
+# --- System files ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
