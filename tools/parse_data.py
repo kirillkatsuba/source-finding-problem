@@ -3,7 +3,7 @@ import xarray as xr
 from tqdm import tqdm
 
 
-def parse_data(dataset_paths, dtype=np.float32, required_shape=None):
+def parse_data(dataset_paths, dtype=np.float32, transform_func=None):
     data = []
     source_coordinates = []
 
@@ -23,17 +23,30 @@ def parse_data(dataset_paths, dtype=np.float32, required_shape=None):
                 subset = conc[:, 0, source, :, :].values  # .values вместо np.array()
                 subset = subset.astype(dtype, copy=False)  # можно ужать до float32
 
-                if required_shape is not None and subset.shape != required_shape:
-                    continue
+                if transform_func:
+                    subset = transform_func(subset)
 
-                source_coordinates.append([
-                    source,
-                    min_lats[source],
-                    min_longs[source],
-                    max_lats[source],
-                    max_longs[source],
-                ])
-                data.append(subset)
+                if not isinstance(subset, list):
+                    subset = [subset]
+
+                for x in subset:
+                    data.append(x)
+                    source_coordinates.append([
+                        source,
+                        min_lats[source],
+                        min_longs[source],
+                        max_lats[source],
+                        max_longs[source],
+                    ])
+
+                # source_coordinates.append([
+                #     source,
+                #     min_lats[source],
+                #     min_longs[source],
+                #     max_lats[source],
+                #     max_longs[source],
+                # ])
+                # data.append(subset)
 
     # for i in range(len(data)):
     #     if data[i].shape != data[0].shape:

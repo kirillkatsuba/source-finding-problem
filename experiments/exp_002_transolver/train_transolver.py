@@ -1,3 +1,4 @@
+from comet_ml import Experiment
 import numpy as np
 import pandas as pd
 import xarray as xr
@@ -24,7 +25,17 @@ dataset_paths = [str(path) for path in POLLUTION_DIR.glob("*")]
 
 xr_tmp = xr.open_dataset(dataset_paths[1])
 
-data, source_coordinates = parse_data(dataset_paths, required_shape=(18, 251, 201))  # пока так, потом надо сделать reshape + stack для 18, 3, 300, 300
+
+def transform_func(item: np.ndarray):
+    if item.shape == (18, 251, 201):
+        return item
+    # elif item.shape == (18, 3, 300, 300):
+    #     return [item[:, 0, :251, :201], item[:, 1, :251, :201], item[:, 2, :251, :201]]
+    else:
+        return []
+
+
+data, source_coordinates = parse_data(dataset_paths, transform_func=transform_func)
 data = np.transpose(data, (0, 2, 3, 1))
 
 T_in = 18
@@ -95,6 +106,9 @@ tmodel = Model(
 optimizer = torch.optim.AdamW(tmodel.parameters())
 myloss = TestLoss(size_average=False)
 
+experiment = Experiment()
+experiment.set_name("transolver-train")
+
 for epoch in range(100):
     print(f"Epoch {epoch+1}")
     tmodel.train()
@@ -107,8 +121,24 @@ for epoch in range(100):
         loss.backward()
         optimizer.step()
         L += loss.item()
-    print(f"Epoch {epoch:03d}  loss {L/len(train_loader):.6f}")
 
+    L /= len(train_loader)
+
+    tmodel.eval()
+    test_L = 0.0
+    with torch.no_grad():
+        for xb, yb, coords in test_loader:
+            xb, yb, coords = xb.to(device, torch.float32), yb.to(device, torch.float32), coords.to(device, torch.float32)
+            pred = tmodel(xb, yb[..., 1:])
+            loss = myloss(pred, yb[..., 0].reshape(yb.shape[0], yb.shape[1], 1))
+            test_L += loss.item()
+
+    test_L /= len(test_loader)
+
+    print(f"Epoch {epoch:03d}  loss {L:.6f}  test_loss {test_L:.6f}")
+    experiment.log_metrics({"train_loss": L, "test_loss": test_L}, step=epoch)
+
+experiment.end()
 
 tmodel.eval()
 
