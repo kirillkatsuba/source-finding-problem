@@ -14,13 +14,11 @@
   "out_suffix": null,
   "no_test": false,
   "smoke": false,
-  "augment": true,
+  "augment": false,
   "rot90": false,
   "normalize": true,
   "backbone_weights": null,
   "freeze_backbone": false,
-  "w_field": 1.0,
-  "w_heatmap": 1.0,
-  "experiment": "exp_003_transolver_heatmap_multitask",
-  "out_name": "exp_003_transolver_heatmap_multitask"
+  "experiment": "exp_002_transolver",
+  "out_name": "exp_002_transolver"
 }

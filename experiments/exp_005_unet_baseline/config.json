@@ -17,10 +17,9 @@
   "augment": true,
   "rot90": false,
   "normalize": true,
-  "backbone_weights": null,
-  "freeze_backbone": false,
+  "base": 32,
   "w_field": 1.0,
   "w_heatmap": 1.0,
-  "experiment": "exp_003_transolver_heatmap_multitask",
-  "out_name": "exp_003_transolver_heatmap_multitask"
+  "experiment": "exp_005_unet_baseline",
+  "out_name": "exp_005_unet_baseline"
 }

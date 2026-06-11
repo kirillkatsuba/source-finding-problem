@@ -20,7 +20,7 @@
   "backbone_weights": null,
   "freeze_backbone": false,
   "w_field": 1.0,
-  "w_heatmap": 1.0,
-  "experiment": "exp_003_transolver_heatmap_multitask",
-  "out_name": "exp_003_transolver_heatmap_multitask"
+  "w_coord": 0.001,
+  "experiment": "exp_004_transolver_regressor_multitask",
+  "out_name": "exp_004_transolver_regressor_multitask"
 }
