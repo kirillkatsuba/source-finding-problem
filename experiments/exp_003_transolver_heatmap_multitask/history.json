@@ -1,0 +1,28 @@
+[
+  {
+    "epoch": 0,
+    "train_total": 3.861768768995236,
+    "train_field": 1.0081786898466256,
+    "train_heatmap": 2.8535900898468802,
+    "train_coord": 0.0,
+    "val_total": 3.2695676136016845,
+    "val_field": 0.8959152817726135,
+    "val_heatmap": 2.3736523628234862,
+    "val_coord": 0.0,
+    "val_error_cells": 13.454293251037598,
+    "val_median_error_cells": 5.656854152679443
+  },
+  {
+    "epoch": 1,
+    "train_total": 2.994517096495017,
+    "train_field": 0.8935684039042546,
+    "train_heatmap": 2.100948695647411,
+    "train_coord": 0.0,
+    "val_total": 2.98199423789978,
+    "val_field": 0.8791736030578613,
+    "val_heatmap": 2.1028206300735475,
+    "val_coord": 0.0,
+    "val_error_cells": 7.9357686042785645,
+    "val_median_error_cells": 3.605551242828369
+  }
+]

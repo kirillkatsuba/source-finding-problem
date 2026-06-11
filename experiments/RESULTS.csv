@@ -1,0 +1,5 @@
+experiment,display,dataset,mean_error_cells,median_error_cells,std_error_cells,mean_smooth_error_cells,n_samples,metrics_path
+exp_003_transolver_heatmap_multitask,Transolver + Heatmap (multi-task),nsk,6.291020393371582,4.123105525970459,5.15199613571167,5.571269989013672,50,experiments/exp_003_transolver_heatmap_multitask/metrics.json
+exp_000_trivial,Trivial baseline (argmax t=17),nsk,14.623470306396484,12.582762718200684,12.098515510559082,20.283023834228516,50,experiments/exp_000_trivial/nsk/metrics.json
+exp_000_trivial,Trivial baseline (argmax t=17),sakhalin,8.356529235839844,3.1622776985168457,14.283226013183594,8.163178443908691,19,experiments/exp_000_trivial/sakhalin/metrics.json
+exp_001_baseline,Physical baseline (backward advection),sakhalin,30.3325252532959,26.305892944335938,21.612398147583008,22.40217399597168,19,experiments/exp_001_baseline/sakhalin_unified/metrics.json

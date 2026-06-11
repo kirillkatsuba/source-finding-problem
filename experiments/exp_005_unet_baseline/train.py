@@ -1,4 +1,4 @@
-"""exp_002: Transolver, только реконструкция поля t=0; источник = argmax поля."""
+"""exp_005: UNet вместо Transolver (контроль ценности backbone)."""
 from __future__ import annotations
 
 import argparse
@@ -10,31 +10,27 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.common import add_common_args, setup_experiment
-from models.transolver_multitask import TransolverMultiTask
-from tools.dataset import transolver_inputs
+from models.unet import UNet
 from tools.trainer import LossWeights, TrainConfig, evaluate_and_dump, fit
 
 
 def forward_fn(model, batch):
-    pos, fx = transolver_inputs(batch)
-    return model(pos, fx)
+    return model(batch["field_input"])
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     add_common_args(parser)
-    parser.add_argument("--backbone-weights", type=str, default=None)
-    parser.add_argument("--freeze-backbone", action="store_true")
-    ctx = setup_experiment(parser, default_name="exp_002_transolver")
+    parser.add_argument("--base", type=int, default=32)
+    parser.add_argument("--w-field", type=float, default=1.0)
+    parser.add_argument("--w-heatmap", type=float, default=1.0)
+    ctx = setup_experiment(parser, default_name="exp_005_unet_baseline")
 
-    model = TransolverMultiTask(
-        h=ctx.train_set.H,
-        w=ctx.train_set.W,
-        t_in=ctx.train_set.T_in,
-        extra_in_channels=(2 if ctx.args.include_wind else 0),
-        backbone_weights=ctx.args.backbone_weights,
-        freeze_backbone=ctx.args.freeze_backbone,
-        use_heatmap=False,
+    model = UNet(
+        in_channels=ctx.train_set.T_in,
+        base=ctx.args.base,
+        use_field=True,
+        use_heatmap=True,
         use_regression=False,
     ).to(ctx.device)
 
@@ -45,7 +41,7 @@ def main() -> None:
         batch_size=ctx.args.batch_size,
         device=str(ctx.device),
         smooth_sigma=ctx.args.smooth_sigma,
-        loss_weights=LossWeights(field=1.0, heatmap=0.0, coord=0.0),
+        loss_weights=LossWeights(field=ctx.args.w_field, heatmap=ctx.args.w_heatmap, coord=0.0),
     )
     fit(model, ctx.train_loader, ctx.val_loader, cfg, forward_fn,
         ctx.out_dir, experiment=ctx.experiment)

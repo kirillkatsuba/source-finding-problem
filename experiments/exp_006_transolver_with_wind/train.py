@@ -1,4 +1,4 @@
-"""exp_002: Transolver, только реконструкция поля t=0; источник = argmax поля."""
+"""exp_006: Transolver + heatmap + ветер (U10/V10) на sakhalin; абляция с ветром / без."""
 from __future__ import annotations
 
 import argparse
@@ -11,13 +11,8 @@ if str(ROOT) not in sys.path:
 
 from experiments.common import add_common_args, setup_experiment
 from models.transolver_multitask import TransolverMultiTask
-from tools.dataset import transolver_inputs
+from tools.dataset import transolver_inputs_with_wind, transolver_inputs
 from tools.trainer import LossWeights, TrainConfig, evaluate_and_dump, fit
-
-
-def forward_fn(model, batch):
-    pos, fx = transolver_inputs(batch)
-    return model(pos, fx)
 
 
 def main() -> None:
@@ -25,16 +20,26 @@ def main() -> None:
     add_common_args(parser)
     parser.add_argument("--backbone-weights", type=str, default=None)
     parser.add_argument("--freeze-backbone", action="store_true")
-    ctx = setup_experiment(parser, default_name="exp_002_transolver")
+    parser.add_argument("--w-field", type=float, default=1.0)
+    parser.add_argument("--w-heatmap", type=float, default=1.0)
+    parser.set_defaults(dataset="sakhalin", include_wind=True)
+    ctx = setup_experiment(parser, default_name="exp_006_transolver_with_wind")
+
+    if ctx.args.dataset != "sakhalin":
+        raise RuntimeError("exp_006 requires --dataset sakhalin (only files with wind)")
+
+    extra = 2 if ctx.args.include_wind else 0
+    forward = (lambda model, batch: model(*transolver_inputs_with_wind(batch))) if ctx.args.include_wind \
+        else (lambda model, batch: model(*transolver_inputs(batch)))
 
     model = TransolverMultiTask(
         h=ctx.train_set.H,
         w=ctx.train_set.W,
         t_in=ctx.train_set.T_in,
-        extra_in_channels=(2 if ctx.args.include_wind else 0),
+        extra_in_channels=extra,
         backbone_weights=ctx.args.backbone_weights,
         freeze_backbone=ctx.args.freeze_backbone,
-        use_heatmap=False,
+        use_heatmap=True,
         use_regression=False,
     ).to(ctx.device)
 
@@ -45,13 +50,13 @@ def main() -> None:
         batch_size=ctx.args.batch_size,
         device=str(ctx.device),
         smooth_sigma=ctx.args.smooth_sigma,
-        loss_weights=LossWeights(field=1.0, heatmap=0.0, coord=0.0),
+        loss_weights=LossWeights(field=ctx.args.w_field, heatmap=ctx.args.w_heatmap, coord=0.0),
     )
-    fit(model, ctx.train_loader, ctx.val_loader, cfg, forward_fn,
+    fit(model, ctx.train_loader, ctx.val_loader, cfg, forward,
         ctx.out_dir, experiment=ctx.experiment)
 
     if not ctx.args.no_test:
-        evaluate_and_dump(model, ctx.test_loader, cfg, forward_fn, ctx.out_dir, experiment=ctx.experiment)
+        evaluate_and_dump(model, ctx.test_loader, cfg, forward, ctx.out_dir, experiment=ctx.experiment)
 
     if ctx.experiment is not None:
         ctx.experiment.end()

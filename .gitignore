@@ -21,7 +21,7 @@ data/*
 *.h5
 *.joblib
 *.pkl
-models/
+#models/
 
 # --- Logs & exp tracking ---
 logs/
@@ -47,3 +47,6 @@ Thumbs.db
 
 
 .comet.config
+data/
+references/
+data.tar.gz
