@@ -8,7 +8,7 @@
   "device": null,
   "heatmap_sigma": 4.0,
   "smooth_sigma": 2.0,
-  "include_wind": true,
+  "include_wind": false,
   "comet": true,
   "name": "sakhalin_no_wind",
   "out_suffix": "no_wind",

@@ -14,7 +14,7 @@
   "out_suffix": null,
   "no_test": false,
   "smoke": false,
-  "augment": false,
+  "augment": true,
   "rot90": false,
   "normalize": true,
   "backbone_weights": null,

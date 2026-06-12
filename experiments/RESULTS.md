@@ -5,19 +5,20 @@ Each row is one method on one dataset. Metric is Euclidean error in grid cells
 
 ## Dataset: nsk
 
-| method                              |   mean err |   median |   std |   smooth mean |   n |
-|:------------------------------------|-----------:|---------:|------:|--------------:|----:|
-| UNet baseline                       |       3.16 |     2.24 |  2.67 |          2.86 |  50 |
-| Transolver (field only)             |       3.32 |     1.41 |  4.30 |          8.06 |  50 |
-| Transolver + Heatmap (multi-task)   |       4.24 |     3.16 |  3.20 |          3.52 |  50 |
-| Transolver + Regressor (multi-task) |       5.04 |     2.24 |  6.86 |          8.86 |  50 |
-| Trivial baseline (argmax t=17)      |      14.62 |    12.58 | 12.10 |         20.28 |  50 |
+| method | mean err | median | std | smooth mean | n |
+| --- | --- | --- | --- | --- | --- |
+| Transolver (field only) | 3.93 | 2.24 | 4.68 | 7.19 | 100 |
+| UNet baseline | 4.13 | 1.71 | 6.08 | 4.13 | 100 |
+| Transolver + Heatmap (multi-task) | 4.64 | 3.61 | 3.74 | 3.55 | 100 |
+| Transolver + Regressor (multi-task) | 12.60 | 11.29 | 8.13 | 12.60 | 100 |
+| Trivial baseline (argmax t=17) | 17.63 | 12.67 | 17.09 | 22.64 | 100 |
 
 ## Dataset: sakhalin
 
-| method                                  |   mean err |   median |   std |   smooth mean |   n |
-|:----------------------------------------|-----------:|---------:|------:|--------------:|----:|
-| Transolver + Heatmap + Wind [with_wind] |       5.37 |     3.61 |  5.78 |          5.23 |  19 |
-| Transolver + Heatmap + Wind [no_wind]   |       6.24 |     3.16 |  9.43 |          4.93 |  19 |
-| Trivial baseline (argmax t=17)          |       8.36 |     3.16 | 14.28 |          8.16 |  19 |
-| Physical baseline (backward advection)  |      30.33 |    26.31 | 21.61 |         22.40 |  19 |
+| method | mean err | median | std | smooth mean | n |
+| --- | --- | --- | --- | --- | --- |
+| Transolver + Heatmap + Wind [with_wind] | 3.38 | 1.41 | 4.46 | 2.87 | 57 |
+| Transolver + Heatmap + Wind [no_wind] | 3.83 | 2.24 | 5.30 | 2.89 | 57 |
+| PINN (advection-diffusion loss) | 5.32 | 2.24 | 10.92 | 4.81 | 57 |
+| Trivial baseline (argmax t=17) | 8.93 | 2.83 | 16.38 | 10.10 | 57 |
+| Physical baseline (backward advection) | 19.19 | 14.32 | 16.49 | 15.74 | 57 |
