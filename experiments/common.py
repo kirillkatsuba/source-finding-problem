@@ -1,4 +1,4 @@
-"""Общая настройка эксперимента: seed, устройство, даталоадеры, Comet."""
+"""Общая настройка эксперимента: seed, устройство, train/test даталоадеры, Comet."""
 from __future__ import annotations
 
 import argparse
@@ -13,7 +13,7 @@ import torch
 from torch.utils.data import DataLoader
 
 from tools.augmentations import AugConfig
-from tools.dataset import SourceDataset
+from tools.dataset import NormStats, SourceDataset
 from tools.device import pick_device
 from tools.splits import Split, classify_files, split_files
 
@@ -32,10 +32,8 @@ class ExperimentContext:
     device: torch.device
     split: Split
     train_loader: DataLoader
-    val_loader: DataLoader
     test_loader: DataLoader
     train_set: SourceDataset
-    val_set: SourceDataset
     test_set: SourceDataset
     out_dir: pathlib.Path
     experiment: object | None
@@ -62,7 +60,10 @@ def add_common_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--normalize", action="store_true")
 
 
-def setup_experiment(parser: argparse.ArgumentParser, default_name: str) -> ExperimentContext:
+def setup_experiment(parser: argparse.ArgumentParser, default_name: str,
+                     unified_norm: bool = False) -> ExperimentContext:
+    # unified_norm: target нормируем теми же статистиками, что и input
+    # (нужно PINN, чтобы C(t=0) и C(t=1) были на одной шкале для physics-loss)
     args = parser.parse_args()
     if args.smoke:
         args.epochs = max(1, min(args.epochs, 2))
@@ -86,19 +87,18 @@ def setup_experiment(parser: argparse.ArgumentParser, default_name: str) -> Expe
     train_set = SourceDataset(split.train, **common_ds_kwargs,
                               augment=aug_cfg if args.augment or args.rot90 else None,
                               seed=args.seed)
-    val_set = SourceDataset(split.val, **common_ds_kwargs)
     test_set = SourceDataset(split.test, **common_ds_kwargs)
     if args.normalize:
         stats = train_set.compute_norm_stats()
+        if unified_norm:
+            stats = NormStats(stats.input_mean, stats.input_std,
+                              stats.input_mean, stats.input_std, stats.wind_scale)
         train_set.set_norm_stats(stats)
-        val_set.set_norm_stats(stats)
         test_set.set_norm_stats(stats)
 
     pin = device.type == "cuda"
     train_loader = DataLoader(train_set, batch_size=args.batch_size, shuffle=True,
                               num_workers=0, pin_memory=pin)
-    val_loader = DataLoader(val_set, batch_size=args.batch_size, shuffle=False,
-                            num_workers=0, pin_memory=pin)
     test_loader = DataLoader(test_set, batch_size=args.batch_size, shuffle=False,
                              num_workers=0, pin_memory=pin)
 
@@ -120,7 +120,7 @@ def setup_experiment(parser: argparse.ArgumentParser, default_name: str) -> Expe
 
     return ExperimentContext(
         args=args, device=device, split=split,
-        train_loader=train_loader, val_loader=val_loader, test_loader=test_loader,
-        train_set=train_set, val_set=val_set, test_set=test_set,
+        train_loader=train_loader, test_loader=test_loader,
+        train_set=train_set, test_set=test_set,
         out_dir=out_dir, experiment=experiment,
     )

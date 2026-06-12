@@ -49,7 +49,7 @@ def main() -> None:
         smooth_sigma=ctx.args.smooth_sigma,
         loss_weights=LossWeights(field=ctx.args.w_field, heatmap=ctx.args.w_heatmap, coord=0.0),
     )
-    fit(model, ctx.train_loader, ctx.val_loader, cfg, forward_fn,
+    fit(model, ctx.train_loader, cfg, forward_fn,
         ctx.out_dir, experiment=ctx.experiment)
 
     if not ctx.args.no_test:

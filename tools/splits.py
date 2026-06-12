@@ -1,4 +1,7 @@
-"""Train/val/test split на уровне файлов: источники из одного файла не текут между сплитами."""
+"""Train/test split на уровне файлов: источники из одного файла не текут между сплитами.
+
+Данных мало, поэтому val не выделяем - только train/test (по умолчанию 80/20).
+"""
 from __future__ import annotations
 
 import pathlib
@@ -17,11 +20,10 @@ SAKHALIN_SHAPE = (18, 1, 19, 3, 300, 300)
 @dataclass
 class Split:
     train: list[pathlib.Path]
-    val: list[pathlib.Path]
     test: list[pathlib.Path]
 
     def summary(self) -> str:
-        return f"train={len(self.train)} val={len(self.val)} test={len(self.test)}"
+        return f"train={len(self.train)} test={len(self.test)}"
 
 
 def _file_shape(path: pathlib.Path) -> tuple[int, ...]:
@@ -31,7 +33,8 @@ def _file_shape(path: pathlib.Path) -> tuple[int, ...]:
 
 def classify_files(pollution_dir: pathlib.Path = POLLUTION_DIR,
                    wind_dir: pathlib.Path = WIND_DIR) -> dict[str, list[pathlib.Path]]:
-    pol_files = sorted(pollution_dir.glob("*.nc"))
+    # skip скрытые файлы (макосные ._* из tar тоже матчат glob, но это не nc)
+    pol_files = sorted(p for p in pollution_dir.glob("*.nc") if not p.name.startswith("."))
     groups: dict[str, list[pathlib.Path]] = {"nsk": [], "sakhalin": []}
     for p in pol_files:
         shape = _file_shape(p)
@@ -43,20 +46,16 @@ def classify_files(pollution_dir: pathlib.Path = POLLUTION_DIR,
 
 
 def split_files(files: list[pathlib.Path],
-                ratios: tuple[float, float, float] = (0.8, 0.1, 0.1),
+                train_frac: float = 0.8,
                 seed: int = 42) -> Split:
     files = sorted(files)
     rng = random.Random(seed)
     indices = list(range(len(files)))
     rng.shuffle(indices)
-
-    n = len(files)
-    n_train = int(round(ratios[0] * n))
-    n_val = int(round(ratios[1] * n))
+    n_train = int(round(train_frac * len(files)))
     return Split(
         train=[files[i] for i in indices[:n_train]],
-        val=[files[i] for i in indices[n_train:n_train + n_val]],
-        test=[files[i] for i in indices[n_train + n_val:]],
+        test=[files[i] for i in indices[n_train:]],
     )
 
 

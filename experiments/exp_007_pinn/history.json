@@ -1,0 +1,32 @@
+[
+  {
+    "epoch": 0,
+    "train_total": 5.087587671321735,
+    "train_field": 0.9038703310907933,
+    "train_heatmap": 4.130117952823639,
+    "train_coord": 0.0,
+    "train_physics": 0.5359934582854948,
+    "val_total": 3.708478463323493,
+    "val_field": 0.8417528522642035,
+    "val_heatmap": 2.824985905697471,
+    "val_coord": 0.0,
+    "val_physics": 0.4173969364921121,
+    "val_error_cells": 4.392355442047119,
+    "val_median_error_cells": 2.8284270763397217
+  },
+  {
+    "epoch": 1,
+    "train_total": 3.674929626155318,
+    "train_field": 0.9436632483674768,
+    "train_heatmap": 2.6831066388832894,
+    "train_coord": 0.0,
+    "train_physics": 0.4815974062964271,
+    "val_total": 3.150727755145023,
+    "val_field": 0.770117678140339,
+    "val_heatmap": 2.3381782581931665,
+    "val_coord": 0.0,
+    "val_physics": 0.4243177539227824,
+    "val_error_cells": 5.3144330978393555,
+    "val_median_error_cells": 3.0
+  }
+]

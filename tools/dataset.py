@@ -26,6 +26,7 @@ class NormStats:
     input_std: float
     target_mean: float
     target_std: float
+    wind_scale: float | None = None   # общий std ветра (один на оба канала -> сохраняет направление)
 
 
 @dataclass
@@ -139,11 +140,17 @@ class SourceDataset(Dataset):
     def compute_norm_stats(self) -> NormStats:
         all_in = np.concatenate([s.field_input.reshape(-1) for s in self.samples])
         all_tg = np.concatenate([s.field_target.reshape(-1) for s in self.samples])
+        wind_scale = None
+        winds = [s.wind for s in self.samples if s.wind is not None]
+        if winds:
+            all_w = np.concatenate([w.reshape(-1) for w in winds])
+            wind_scale = float(all_w.std() + 1e-8)
         return NormStats(
             input_mean=float(all_in.mean()),
             input_std=float(all_in.std() + 1e-8),
             target_mean=float(all_tg.mean()),
             target_std=float(all_tg.std() + 1e-8),
+            wind_scale=wind_scale,
         )
 
     def set_norm_stats(self, stats: NormStats) -> None:
@@ -181,6 +188,10 @@ class SourceDataset(Dataset):
         if self.norm_stats is not None:
             field_input = (field_input - self.norm_stats.input_mean) / self.norm_stats.input_std
             field_target = (field_target - self.norm_stats.target_mean) / self.norm_stats.target_std
+            # ветер делим на общий std (один на U/V) - масштаб ~ как у концентрации,
+            # направление сохраняется, знак после аугментации не трогаем
+            if wind is not None and self.norm_stats.wind_scale:
+                wind = wind / self.norm_stats.wind_scale
 
         item: dict[str, torch.Tensor | str | int] = {
             "field_input": torch.from_numpy(field_input.astype(np.float32, copy=False)),

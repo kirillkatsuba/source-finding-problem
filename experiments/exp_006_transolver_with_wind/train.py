@@ -22,7 +22,8 @@ def main() -> None:
     parser.add_argument("--freeze-backbone", action="store_true")
     parser.add_argument("--w-field", type=float, default=1.0)
     parser.add_argument("--w-heatmap", type=float, default=1.0)
-    parser.set_defaults(dataset="sakhalin", include_wind=True)
+    # ветер включается флагом --include-wind; без него no-wind (для честной абляции)
+    parser.set_defaults(dataset="sakhalin")
     ctx = setup_experiment(parser, default_name="exp_006_transolver_with_wind")
 
     if ctx.args.dataset != "sakhalin":
@@ -52,7 +53,7 @@ def main() -> None:
         smooth_sigma=ctx.args.smooth_sigma,
         loss_weights=LossWeights(field=ctx.args.w_field, heatmap=ctx.args.w_heatmap, coord=0.0),
     )
-    fit(model, ctx.train_loader, ctx.val_loader, cfg, forward,
+    fit(model, ctx.train_loader, cfg, forward,
         ctx.out_dir, experiment=ctx.experiment)
 
     if not ctx.args.no_test:

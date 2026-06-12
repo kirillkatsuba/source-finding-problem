@@ -56,7 +56,7 @@ poetry run python experiments/exp_001_baseline/run_unified.py
 echo ">>> exp_002 Transolver field-only (nsk)"
 poetry run python experiments/exp_002_transolver/train_transolver.py \
     --dataset nsk --epochs "$EPOCHS" --batch-size "$BS" --lr "$LR" \
-    --normalize $EXTRA_FLAGS
+    --augment --normalize $EXTRA_FLAGS
 
 echo ">>> exp_003 Transolver + heatmap (nsk)"
 poetry run python experiments/exp_003_transolver_heatmap_multitask/train.py \
@@ -84,6 +84,11 @@ poetry run python experiments/exp_006_transolver_with_wind/train.py \
     --epochs "$EPOCHS" --batch-size 4 --lr "$LR" \
     --include-wind --augment --rot90 --normalize \
     --name "sakhalin_with_wind" --out-suffix "with_wind" $EXTRA_FLAGS
+
+echo ">>> exp_007 PINN (sakhalin, advection-diffusion loss)"
+poetry run python experiments/exp_007_pinn/train.py \
+    --epochs "$EPOCHS" --batch-size 4 --lr "$LR" \
+    --augment --rot90 --normalize --w-physics 0.1 $EXTRA_FLAGS
 
 echo ">>> aggregate + plots"
 poetry run python experiments/aggregate.py

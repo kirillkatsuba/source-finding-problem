@@ -17,7 +17,12 @@ DISPLAY_NAMES = {
     "exp_004_transolver_regressor_multitask": "Transolver + Regressor (multi-task)",
     "exp_005_unet_baseline": "UNet baseline",
     "exp_006_transolver_with_wind": "Transolver + Heatmap + Wind",
+    "exp_007_pinn": "PINN (advection-diffusion loss)",
 }
+
+_COLS = ["mean_error_cells", "median_error_cells", "std_error_cells",
+         "mean_smooth_error_cells", "n_samples"]
+_HEADERS = ["method", "mean err", "median", "std", "smooth mean", "n"]
 
 
 def _infer_dataset(metrics_path: pathlib.Path) -> str | None:
@@ -69,24 +74,26 @@ def collect() -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values(["dataset", "mean_error_cells"]).reset_index(drop=True)
 
 
+def _fmt(value, col) -> str:
+    if value is None:
+        return ""
+    if col == "n_samples":
+        return str(int(value))
+    return f"{value:.2f}"
+
+
 def to_markdown(df: pd.DataFrame) -> str:
     if df.empty:
         return "_no metrics.json found yet - run some experiments first_\n"
     chunks = []
     for ds in sorted(df["dataset"].unique()):
         chunks.append(f"## Dataset: {ds}\n")
-        sub = df[df["dataset"] == ds][[
-            "display", "mean_error_cells", "median_error_cells",
-            "std_error_cells", "mean_smooth_error_cells", "n_samples",
-        ]].rename(columns={
-            "display": "method",
-            "mean_error_cells": "mean err",
-            "median_error_cells": "median",
-            "std_error_cells": "std",
-            "mean_smooth_error_cells": "smooth mean",
-            "n_samples": "n",
-        })
-        chunks.append(sub.to_markdown(index=False, floatfmt=".2f") + "\n")
+        lines = ["| " + " | ".join(_HEADERS) + " |",
+                 "| " + " | ".join(["---"] * len(_HEADERS)) + " |"]
+        for _, r in df[df["dataset"] == ds].iterrows():
+            cells = [str(r["display"])] + [_fmt(r[c], c) for c in _COLS]
+            lines.append("| " + " | ".join(cells) + " |")
+        chunks.append("\n".join(lines) + "\n")
     return "\n".join(chunks)
 
 

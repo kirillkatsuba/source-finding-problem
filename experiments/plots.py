@@ -19,6 +19,7 @@ DISPLAY_NAMES = {
     "exp_004_transolver_regressor_multitask": "Transolver + Regressor",
     "exp_005_unet_baseline": "UNet",
     "exp_006_transolver_with_wind": "Transolver + Wind",
+    "exp_007_pinn": "PINN (adv-diff loss)",
 }
 
 
