@@ -16,16 +16,22 @@ if str(ROOT) not in sys.path:
 
 from tools.dataset import SourceDataset
 from tools.metrics import batch_field_to_xy, summarize
-from tools.splits import classify_files, split_files
+from tools.splits import classify_files, n_sources_for, split_files, split_sources
 
 
-def run(dataset_kind: str, seed: int = 42, smooth_sigma: float = 2.0) -> None:
+def run(dataset_kind: str, seed: int = 42, smooth_sigma: float = 2.0,
+        source_split: bool = False) -> None:
     out_dir = pathlib.Path(__file__).resolve().parent / dataset_kind
     out_dir.mkdir(parents=True, exist_ok=True)
 
     groups = classify_files()
-    split = split_files(groups[dataset_kind], seed=seed)
-    test_set = SourceDataset(split.test, dataset_kind=dataset_kind, quiet=False)
+    if source_split:
+        _, test_src = split_sources(n_sources_for(dataset_kind), seed=seed)
+        test_set = SourceDataset(groups[dataset_kind], dataset_kind=dataset_kind,
+                                 source_indices=test_src, quiet=False)
+    else:
+        split = split_files(groups[dataset_kind], seed=seed)
+        test_set = SourceDataset(split.test, dataset_kind=dataset_kind, quiet=False)
 
     pred_xy = np.zeros((len(test_set), 2), dtype=np.int64)
     pred_xy_smooth = np.zeros_like(pred_xy)
@@ -58,10 +64,11 @@ def main() -> None:
     p.add_argument("--dataset", choices=["nsk", "sakhalin", "both"], default="both")
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--smooth-sigma", type=float, default=2.0)
+    p.add_argument("--source-split", action="store_true")
     args = p.parse_args()
     kinds = ["nsk", "sakhalin"] if args.dataset == "both" else [args.dataset]
     for k in kinds:
-        run(k, seed=args.seed, smooth_sigma=args.smooth_sigma)
+        run(k, seed=args.seed, smooth_sigma=args.smooth_sigma, source_split=args.source_split)
 
 
 if __name__ == "__main__":

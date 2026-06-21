@@ -118,6 +118,7 @@ class SourceDataset(Dataset):
                  heatmap_sigma: float = 4.0,
                  include_wind: bool = False,
                  quiet: bool = False,
+                 source_indices: list[int] | None = None,
                  augment: AugConfig | None = None,
                  norm_stats: NormStats | None = None,
                  seed: int = 0):
@@ -135,6 +136,10 @@ class SourceDataset(Dataset):
         iterator = files if quiet else tqdm(files, desc=f"load {dataset_kind}")
         for p in iterator:
             self.samples.extend(loader(p))
+
+        if source_indices is not None:
+            keep = set(source_indices)
+            self.samples = [s for s in self.samples if s.source_idx in keep]
 
         if not self.samples:
             raise RuntimeError(f"no samples loaded for dataset_kind={dataset_kind}")

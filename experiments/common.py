@@ -15,7 +15,7 @@ from torch.utils.data import DataLoader
 from tools.augmentations import AugConfig
 from tools.dataset import NormStats, SourceDataset
 from tools.device import pick_device
-from tools.splits import Split, classify_files, split_files
+from tools.splits import Split, classify_files, n_sources_for, split_files, split_sources
 
 
 def set_seed(seed: int) -> None:
@@ -57,6 +57,9 @@ def add_common_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument("--augment", action="store_true")
     parser.add_argument("--rot90", action="store_true")
+    parser.add_argument("--translate", action="store_true")
+    parser.add_argument("--max-shift", type=int, default=48)
+    parser.add_argument("--source-split", action="store_true")
     parser.add_argument("--normalize", action="store_true")
 
 
@@ -76,18 +79,30 @@ def setup_experiment(parser: argparse.ArgumentParser, default_name: str,
     files = groups[args.dataset]
     if not files:
         raise RuntimeError(f"no files for dataset={args.dataset}")
-    split = split_files(files, seed=args.seed)
+
+    # source-split: те же файлы, но непересекающиеся источники; иначе обычный file-split
+    if args.source_split:
+        train_src, test_src = split_sources(n_sources_for(args.dataset), seed=args.seed)
+        train_files = test_files = files
+    else:
+        fsplit = split_files(files, seed=args.seed)
+        train_files, test_files = fsplit.train, fsplit.test
+        train_src = test_src = None
+    split = Split(train=train_files, test=test_files)
 
     common_ds_kwargs = dict(
         dataset_kind=args.dataset,
         heatmap_sigma=args.heatmap_sigma,
         include_wind=args.include_wind,
     )
-    aug_cfg = AugConfig(flip_h=args.augment, flip_v=args.augment, rot90=args.rot90)
-    train_set = SourceDataset(split.train, **common_ds_kwargs,
-                              augment=aug_cfg if args.augment or args.rot90 else None,
-                              seed=args.seed)
-    test_set = SourceDataset(split.test, **common_ds_kwargs)
+    aug_on = args.augment or args.rot90 or args.translate
+    aug_cfg = AugConfig(flip_h=args.augment, flip_v=args.augment, rot90=args.rot90,
+                        translate=args.translate, max_shift=args.max_shift)
+    train_set = SourceDataset(train_files, **common_ds_kwargs, source_indices=train_src,
+                              augment=aug_cfg if aug_on else None, seed=args.seed)
+    test_set = SourceDataset(test_files, **common_ds_kwargs, source_indices=test_src)
+    print(f"split[{'source' if args.source_split else 'file'}]: "
+          f"train={len(train_set)} test={len(test_set)} samples")
     if args.normalize:
         stats = train_set.compute_norm_stats()
         if unified_norm:

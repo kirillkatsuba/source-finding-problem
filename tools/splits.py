@@ -59,6 +59,22 @@ def split_files(files: list[pathlib.Path],
     )
 
 
+def n_sources_for(dataset_kind: str) -> int:
+    return {"nsk": NSK_SHAPE[2], "sakhalin": SAKHALIN_SHAPE[2]}[dataset_kind]
+
+
+def split_sources(n_sources: int,
+                  train_frac: float = 0.8,
+                  seed: int = 42) -> tuple[list[int], list[int]]:
+    # source-disjoint: целые локации источников держим только в одном из сплитов
+    # (источники фиксированы между файлами, поэтому file-split их не разделяет)
+    rng = random.Random(seed)
+    idx = list(range(n_sources))
+    rng.shuffle(idx)
+    k = int(round(train_frac * n_sources))
+    return sorted(idx[:k]), sorted(idx[k:])
+
+
 def wind_path_for(pol_path: pathlib.Path,
                   wind_dir: pathlib.Path = WIND_DIR) -> pathlib.Path | None:
     w = wind_dir / f"wind_for_{pol_path.name}"

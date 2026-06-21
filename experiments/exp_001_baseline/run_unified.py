@@ -24,7 +24,7 @@ from experiments.exp_001_baseline.run_baseline import (
 )
 from tools.dataset import true_source_xy
 from tools.metrics import summarize
-from tools.splits import classify_files, split_files, wind_path_for
+from tools.splits import classify_files, n_sources_for, split_files, split_sources, wind_path_for
 
 
 def _argmax_xy(field: np.ndarray) -> tuple[int, int]:
@@ -90,22 +90,29 @@ def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--smooth-sigma", type=float, default=2.0)
+    p.add_argument("--source-split", action="store_true")
     args = p.parse_args()
 
     out_dir = pathlib.Path(__file__).resolve().parent / "sakhalin_unified"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     groups = classify_files()
-    split = split_files(groups["sakhalin"], seed=args.seed)
+    if args.source_split:
+        _, test_src = split_sources(n_sources_for("sakhalin"), seed=args.seed)
+        files = groups["sakhalin"]
+    else:
+        files = split_files(groups["sakhalin"], seed=args.seed).test
+        test_src = None
 
     rows: list[dict] = []
-    for pol_path in tqdm(split.test, desc="files"):
+    for pol_path in tqdm(files, desc="files"):
         wind_path = wind_path_for(pol_path)
         if wind_path is None:
             continue
         with xr.open_dataset(pol_path) as ds:
             n_releases = ds["CONC"].shape[2]
-        for r in range(n_releases):
+        releases = test_src if test_src is not None else range(n_releases)
+        for r in releases:
             res = predict_one(pol_path, wind_path, r, smooth_sigma=args.smooth_sigma)
             if res is not None:
                 rows.append(res)
