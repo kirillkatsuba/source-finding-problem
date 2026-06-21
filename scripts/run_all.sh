@@ -93,3 +93,4 @@ poetry run python experiments/exp_007_pinn/train.py \
 echo ">>> aggregate + plots"
 poetry run python experiments/aggregate.py
 poetry run python experiments/plots.py
+poetry run python tools/compare.py
