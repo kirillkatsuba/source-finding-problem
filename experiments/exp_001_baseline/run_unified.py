@@ -22,6 +22,7 @@ from experiments.exp_001_baseline.run_baseline import (
     parse_time,
     solve_backwards,
 )
+from tools.dataset import true_source_xy
 from tools.metrics import summarize
 from tools.splits import classify_files, split_files, wind_path_for
 
@@ -40,11 +41,7 @@ def predict_one(pol_path: pathlib.Path,
                 smooth_sigma: float = 2.0) -> dict | None:
     with xr.open_dataset(pol_path) as ds_pol, xr.open_dataset(wind_path) as ds_wind:
         conc = ds_pol["CONC"]
-        # GT источник = argmax поля t=0
-        target_field = conc.isel(
-            Time=0, releases=release_idx, bottom_top=level_idx, species=0,
-        ).values
-        true_x, true_y = _argmax_xy(target_field)
+        true_x, true_y = true_source_xy(conc, release_idx)
 
         dx, dy = compute_grid_spacing(ds_pol)
         t_target = parse_time(ds_pol["Time"][0].values)

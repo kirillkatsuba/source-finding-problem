@@ -1,4 +1,4 @@
-"""Метрика локализации: евклидова ошибка в клетках до argmax поля t=0."""
+"""Метрика локализации: евклидова ошибка в клетках до истинного источника (из attrs)."""
 from __future__ import annotations
 
 from dataclasses import dataclass

@@ -1,7 +1,7 @@
 """Dataset: один сэмпл = один выброс (release) из .nc.
 
 field_input (T_in,H,W) при t=1..t=17, field_target (H,W) при t=0,
-coords (x,y)=argmax(field_target), heatmap (H,W), wind (2,H,W) опц. (Sakhalin).
+coords (x,y) = истинный источник из attrs (точка выброса), heatmap (H,W), wind опц. (Sakhalin).
 """
 from __future__ import annotations
 
@@ -39,23 +39,32 @@ class Sample:
     source_idx: int
 
 
-def _argmax_xy(field2d: np.ndarray) -> tuple[int, int]:
-    flat = int(np.argmax(field2d))
-    h, w = field2d.shape
-    y, x = divmod(flat, w)
-    return int(x), int(y)
+def true_source_xy(conc: xr.DataArray, release_idx: int) -> tuple[int, int]:
+    """Истинный источник из attrs (точка выброса) -> клетка сетки. Сетка Regular
+    Latit/Longit, поэтому линейный перевод lon/lat. argmax поля брать нельзя: это пик
+    струи, снесённый ветром от источника (расхождение до десятков клеток)."""
+    a = conc.attrs
+    olon, olat = float(a["OUTGRID_LONG"]), float(a["OUTGRID_LAT"])
+    dx, dy = float(a["DX"]), float(a["DY"])
+    h, w = int(conc.shape[-2]), int(conc.shape[-1])
+    lat = 0.5 * (float(np.atleast_1d(a["MIN_LATS"])[release_idx]) + float(np.atleast_1d(a["MAX_LATS"])[release_idx]))
+    lon = 0.5 * (float(np.atleast_1d(a["MIN_LONGS"])[release_idx]) + float(np.atleast_1d(a["MAX_LONGS"])[release_idx]))
+    x = min(max(int(round((lon - olon) / dx)), 0), w - 1)
+    y = min(max(int(round((lat - olat) / dy)), 0), h - 1)
+    return x, y
 
 
 def _load_nsk_samples(path: pathlib.Path) -> list[Sample]:
     samples: list[Sample] = []
     with xr.open_dataset(path) as ds:
-        conc = ds["CONC"].values  # (18, 1, 10, 251, 201)
+        conc_da = ds["CONC"]
+        conc = conc_da.values  # (18, 1, 10, 251, 201)
         n_releases = conc.shape[2]
         for s in range(n_releases):
             cube = conc[:, 0, s, :, :].astype(np.float32, copy=False)  # (18, H, W)
             field_target = cube[0]
             field_input = cube[1:]
-            x, y = _argmax_xy(field_target)
+            x, y = true_source_xy(conc_da, s)
             samples.append(Sample(
                 field_input=field_input,
                 field_target=field_target,
@@ -73,8 +82,10 @@ def _load_sakhalin_samples(path: pathlib.Path,
     samples: list[Sample] = []
     wind_path = wind_path_for(path, wind_dir=wind_dir)
     with xr.open_dataset(path) as ds:
-        conc = ds["CONC"].isel(bottom_top=bottom_top).values  # (18, 1, 19, H, W)
+        conc_da = ds["CONC"]
+        conc = conc_da.isel(bottom_top=bottom_top).values  # (18, 1, 19, H, W)
         n_releases = conc.shape[2]
+        src_xy = [true_source_xy(conc_da, s) for s in range(n_releases)]
     wind_arr: np.ndarray | None = None
     if wind_path is not None:
         with xr.open_dataset(wind_path) as wds:
@@ -86,7 +97,7 @@ def _load_sakhalin_samples(path: pathlib.Path,
         cube = conc[:, 0, s, :, :].astype(np.float32, copy=False)  # (18, H, W)
         field_target = cube[0]
         field_input = cube[1:]
-        x, y = _argmax_xy(field_target)
+        x, y = src_xy[s]
         samples.append(Sample(
             field_input=field_input,
             field_target=field_target,

@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 from typing import Any, TypedDict
 
@@ -8,6 +9,12 @@ import pandas as pd
 import xarray as xr
 from scipy.ndimage import gaussian_filter
 from tqdm import tqdm
+
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from tools.dataset import true_source_xy
 
 PLOTS_DIR = Path("experiments/exp_001_baseline/plots")
 PREDICTIONS_CSV_PATH = Path("experiments/exp_001_baseline/predictions.csv")
@@ -45,12 +52,9 @@ def parse_time(t_raw: Any) -> pd.Timestamp | None:
 
 
 def get_true_source_coordinates(nc_path: Path | str, release_idx: int = 0) -> tuple[int, int]:
-    """Get true source coordinates from the maximum in the first concentration frame."""
+    """Истинный источник из attrs (точка выброса), не argmax поля."""
     with xr.open_dataset(nc_path) as ds:
-        conc_t0 = ds["CONC"].isel(Time=0, releases=release_idx, bottom_top=0, species=0).values
-
-    y_idx, x_idx = np.unravel_index(np.argmax(conc_t0), conc_t0.shape)
-    return int(x_idx), int(y_idx)
+        return true_source_xy(ds["CONC"], release_idx)
 
 
 def solve_backwards(
