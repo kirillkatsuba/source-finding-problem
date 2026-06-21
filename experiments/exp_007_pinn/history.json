@@ -1,802 +1,802 @@
 [
   {
     "epoch": 0,
-    "train_total": 5.666695615701508,
-    "train_field": 0.9574016573136312,
-    "train_heatmap": 4.640994732840019,
+    "train_total": 6.164303541183472,
+    "train_field": 0.89456707239151,
+    "train_heatmap": 5.198793854629784,
     "train_coord": 0.0,
-    "train_physics": 0.6829923751208473
+    "train_physics": 0.7094260000444034
   },
   {
     "epoch": 1,
-    "train_total": 3.8379123796496475,
-    "train_field": 0.8643946135253237,
-    "train_heatmap": 2.916809038112038,
+    "train_total": 4.78599612754688,
+    "train_field": 0.9157192320154425,
+    "train_heatmap": 3.799540214371263,
     "train_coord": 0.0,
-    "train_physics": 0.5670871664667829
+    "train_physics": 0.7073666373341295
   },
   {
     "epoch": 2,
-    "train_total": 3.34540177228158,
-    "train_field": 0.8338129374018887,
-    "train_heatmap": 2.453137569260179,
+    "train_total": 4.149209035070319,
+    "train_field": 0.8456111477132429,
+    "train_heatmap": 3.248510377448902,
     "train_coord": 0.0,
-    "train_physics": 0.5845125882780147
+    "train_physics": 0.5508750451998295
   },
   {
     "epoch": 3,
-    "train_total": 3.1601221979710092,
-    "train_field": 0.7852028566494322,
-    "train_heatmap": 2.3232524478644656,
+    "train_total": 3.8705227291374875,
+    "train_field": 0.7622090421224895,
+    "train_heatmap": 3.065212839528134,
     "train_coord": 0.0,
-    "train_physics": 0.5166689848502803
+    "train_physics": 0.431008464628177
   },
   {
     "epoch": 4,
-    "train_total": 2.89095587897719,
-    "train_field": 0.7423574872184218,
-    "train_heatmap": 2.101541653014066,
+    "train_total": 3.670345712126347,
+    "train_field": 0.7200221680758292,
+    "train_heatmap": 2.9122276306152344,
     "train_coord": 0.0,
-    "train_physics": 0.47056741619956466
+    "train_physics": 0.380959127972458
   },
   {
     "epoch": 5,
-    "train_total": 2.7779768454401115,
-    "train_field": 0.7080366057262086,
-    "train_heatmap": 2.0271839970036556,
+    "train_total": 3.4949279877177455,
+    "train_field": 0.6759762899917469,
+    "train_heatmap": 2.7844575434400323,
     "train_coord": 0.0,
-    "train_physics": 0.427562498514083
+    "train_physics": 0.3449417097624718
   },
   {
     "epoch": 6,
-    "train_total": 2.717767278353373,
-    "train_field": 0.7354340961104945,
-    "train_heatmap": 1.944179194015369,
+    "train_total": 3.3717910866988334,
+    "train_field": 0.6625810610620599,
+    "train_heatmap": 2.6750030433922483,
     "train_coord": 0.0,
-    "train_physics": 0.3815398134062426
+    "train_physics": 0.3420694319086084
   },
   {
     "epoch": 7,
-    "train_total": 2.626096901140715,
-    "train_field": 0.6753088695961132,
-    "train_heatmap": 1.9145180865337974,
+    "train_total": 3.3215435931557105,
+    "train_field": 0.6569337510226065,
+    "train_heatmap": 2.630478020299945,
     "train_coord": 0.0,
-    "train_physics": 0.3626995544059594
+    "train_physics": 0.3413181647948365
   },
   {
     "epoch": 8,
-    "train_total": 2.5689586714694372,
-    "train_field": 0.6593963357440212,
-    "train_heatmap": 1.8745478517130802,
+    "train_total": 3.1899745506152772,
+    "train_field": 0.676237960656484,
+    "train_heatmap": 2.4810925052877058,
     "train_coord": 0.0,
-    "train_physics": 0.350144865514155
+    "train_physics": 0.32644076895360885
   },
   {
     "epoch": 9,
-    "train_total": 2.5905971192477044,
-    "train_field": 0.6579200520850065,
-    "train_heatmap": 1.8962088865146303,
+    "train_total": 3.1477878261030767,
+    "train_field": 0.6388046459147805,
+    "train_heatmap": 2.4755685705887642,
     "train_coord": 0.0,
-    "train_physics": 0.36468163941856147
+    "train_physics": 0.3341457108485006
   },
   {
     "epoch": 10,
-    "train_total": 2.5307109983343827,
-    "train_field": 0.6425628944447166,
-    "train_heatmap": 1.8526205012672825,
+    "train_total": 3.0952983467202437,
+    "train_field": 0.6702312178779066,
+    "train_heatmap": 2.3921558689652827,
     "train_coord": 0.0,
-    "train_physics": 0.3552758442748567
+    "train_physics": 0.329112797232116
   },
   {
     "epoch": 11,
-    "train_total": 2.5029678051931814,
-    "train_field": 0.6568960568361115,
-    "train_heatmap": 1.8111265563128287,
+    "train_total": 2.997881663473029,
+    "train_field": 0.6303804088057133,
+    "train_heatmap": 2.334612848465903,
     "train_coord": 0.0,
-    "train_physics": 0.3494516917863828
+    "train_physics": 0.3288841107206648
   },
   {
     "epoch": 12,
-    "train_total": 2.413952612040336,
-    "train_field": 0.6108329792817434,
-    "train_heatmap": 1.7698319983064084,
+    "train_total": 3.0410226311599997,
+    "train_field": 0.5967398427034679,
+    "train_heatmap": 2.4103449750364874,
     "train_coord": 0.0,
-    "train_physics": 0.3328762025748004
+    "train_physics": 0.33937839994394925
   },
   {
     "epoch": 13,
-    "train_total": 2.341593154689722,
-    "train_field": 0.6050131571920294,
-    "train_heatmap": 1.7036953976279812,
+    "train_total": 2.8938335724044264,
+    "train_field": 0.5884102462676534,
+    "train_heatmap": 2.273310711509303,
     "train_coord": 0.0,
-    "train_physics": 0.32884592829647946
+    "train_physics": 0.3211261865421476
   },
   {
     "epoch": 14,
-    "train_total": 2.3739917236461974,
-    "train_field": 0.6114645333666551,
-    "train_heatmap": 1.7301146388053894,
+    "train_total": 2.9094235792494656,
+    "train_field": 0.5906751040826764,
+    "train_heatmap": 2.2865676712571528,
     "train_coord": 0.0,
-    "train_physics": 0.32412556615625426
+    "train_physics": 0.32180797522928434
   },
   {
     "epoch": 15,
-    "train_total": 2.2739177523997793,
-    "train_field": 0.5800104637940725,
-    "train_heatmap": 1.6620191544817204,
+    "train_total": 2.8605811825969765,
+    "train_field": 0.5781610958408891,
+    "train_heatmap": 2.2493201389647366,
     "train_coord": 0.0,
-    "train_physics": 0.3188815219368655
+    "train_physics": 0.3309995744197646
   },
   {
     "epoch": 16,
-    "train_total": 2.249588397511265,
-    "train_field": 0.5706635546265987,
-    "train_heatmap": 1.6468372627308494,
+    "train_total": 2.9065000739013938,
+    "train_field": 0.5937940771119636,
+    "train_heatmap": 2.280011685271012,
     "train_coord": 0.0,
-    "train_physics": 0.3208756392511229
+    "train_physics": 0.32694325541766983
   },
   {
     "epoch": 17,
-    "train_total": 2.1991774513010394,
-    "train_field": 0.5488854155205843,
-    "train_heatmap": 1.6175873007690698,
+    "train_total": 2.7947604802616857,
+    "train_field": 0.5378011883350841,
+    "train_heatmap": 2.2240170261316132,
     "train_coord": 0.0,
-    "train_physics": 0.32704726614776936
+    "train_physics": 0.32942252317157555
   },
   {
     "epoch": 18,
-    "train_total": 2.2176472136848853,
-    "train_field": 0.5556709719331641,
-    "train_heatmap": 1.6304538459108586,
+    "train_total": 2.7920880986933123,
+    "train_field": 0.569191423947351,
+    "train_heatmap": 2.1901303153288993,
     "train_coord": 0.0,
-    "train_physics": 0.3152239137786653
+    "train_physics": 0.32766362487975703
   },
   {
     "epoch": 19,
-    "train_total": 2.1749174950415626,
-    "train_field": 0.5381118027787459,
-    "train_heatmap": 1.604527821666316,
+    "train_total": 2.796552200066416,
+    "train_field": 0.590602682870731,
+    "train_heatmap": 2.1736077948620447,
     "train_coord": 0.0,
-    "train_physics": 0.32277860260249946
+    "train_physics": 0.32341715000496296
   },
   {
     "epoch": 20,
-    "train_total": 2.153990387916565,
-    "train_field": 0.5289451072090551,
-    "train_heatmap": 1.5931663314501445,
+    "train_total": 2.6708963983937313,
+    "train_field": 0.5045872116298006,
+    "train_heatmap": 2.1338403162203337,
     "train_coord": 0.0,
-    "train_physics": 0.31878949277789187
+    "train_physics": 0.3246888479303667
   },
   {
     "epoch": 21,
-    "train_total": 2.1224411684170104,
-    "train_field": 0.5160751295717139,
-    "train_heatmap": 1.5727721672309072,
+    "train_total": 2.6879885614964,
+    "train_field": 0.5014524721262748,
+    "train_heatmap": 2.1528638977753487,
     "train_coord": 0.0,
-    "train_physics": 0.33593874698374093
+    "train_physics": 0.33672211998297524
   },
   {
     "epoch": 22,
-    "train_total": 2.126236415745919,
-    "train_field": 0.5088805880462914,
-    "train_heatmap": 1.5835862567550258,
+    "train_total": 2.6763029182166385,
+    "train_field": 0.4931688496941014,
+    "train_heatmap": 2.1483326083735417,
     "train_coord": 0.0,
-    "train_physics": 0.337695806450619
+    "train_physics": 0.3480146348541766
   },
   {
     "epoch": 23,
-    "train_total": 2.1208779644547846,
-    "train_field": 0.5078685498028471,
-    "train_heatmap": 1.5794336712151242,
+    "train_total": 2.7190106605228626,
+    "train_field": 0.4906102879005566,
+    "train_heatmap": 2.1939446947030854,
     "train_coord": 0.0,
-    "train_physics": 0.3357574508317109
+    "train_physics": 0.3445567069350529
   },
   {
     "epoch": 24,
-    "train_total": 2.106727782048677,
-    "train_field": 0.501799567226778,
-    "train_heatmap": 1.569913533695957,
+    "train_total": 2.6473655805253147,
+    "train_field": 0.4867407710928666,
+    "train_heatmap": 2.126133680343628,
     "train_coord": 0.0,
-    "train_physics": 0.3501469934616532
+    "train_physics": 0.3449111591979632
   },
   {
     "epoch": 25,
-    "train_total": 2.106567010544894,
-    "train_field": 0.5221782964572572,
-    "train_heatmap": 1.5513451287620945,
+    "train_total": 2.6485061164487873,
+    "train_field": 0.48131980655486123,
+    "train_heatmap": 2.132622482483847,
     "train_coord": 0.0,
-    "train_physics": 0.3304358493953355
+    "train_physics": 0.34563817855853
   },
   {
     "epoch": 26,
-    "train_total": 2.0439278640245138,
-    "train_field": 0.4814865359088831,
-    "train_heatmap": 1.52702792485555,
+    "train_total": 2.665909455533613,
+    "train_field": 0.5122413786879757,
+    "train_heatmap": 2.118111121027093,
     "train_coord": 0.0,
-    "train_physics": 0.3541342099809921
+    "train_physics": 0.3555694282414359
   },
   {
     "epoch": 27,
-    "train_total": 2.0507320960362754,
-    "train_field": 0.47763282269762275,
-    "train_heatmap": 1.5383967119350768,
+    "train_total": 2.6838925491299546,
+    "train_field": 0.5306110157255541,
+    "train_heatmap": 2.118023487559536,
     "train_coord": 0.0,
-    "train_physics": 0.34702566094500453
+    "train_physics": 0.35258062249825645
   },
   {
     "epoch": 28,
-    "train_total": 2.0600879108696653,
-    "train_field": 0.48515774283492774,
-    "train_heatmap": 1.539943420050437,
+    "train_total": 2.6515959250299552,
+    "train_field": 0.5082303709105441,
+    "train_heatmap": 2.1081564719216868,
     "train_coord": 0.0,
-    "train_physics": 0.34986735867916424
+    "train_physics": 0.35209087422934543
   },
   {
     "epoch": 29,
-    "train_total": 2.099152138358668,
-    "train_field": 0.5457950673605266,
-    "train_heatmap": 1.5184699286494339,
+    "train_total": 2.6166048279979774,
+    "train_field": 0.48995982450351383,
+    "train_heatmap": 2.091254974666395,
     "train_coord": 0.0,
-    "train_physics": 0.34887138671617496
+    "train_physics": 0.3539003901379673
   },
   {
     "epoch": 30,
-    "train_total": 2.0175270344081677,
-    "train_field": 0.48140076168796475,
-    "train_heatmap": 1.501005724856728,
+    "train_total": 2.5839210330394278,
+    "train_field": 0.4700796551871718,
+    "train_heatmap": 2.0776783876251756,
     "train_coord": 0.0,
-    "train_physics": 0.35120549773911763
+    "train_physics": 0.36162998333671376
   },
   {
     "epoch": 31,
-    "train_total": 1.994712507515623,
-    "train_field": 0.4749954311471236,
-    "train_heatmap": 1.4833985943543284,
+    "train_total": 2.544332408068473,
+    "train_field": 0.4753796599413219,
+    "train_heatmap": 2.033706075266788,
     "train_coord": 0.0,
-    "train_physics": 0.36318482074012426
+    "train_physics": 0.35246663171544734
   },
   {
     "epoch": 32,
-    "train_total": 2.0093248768856653,
-    "train_field": 0.47589875417843197,
-    "train_heatmap": 1.4987029736502129,
+    "train_total": 2.559034514845463,
+    "train_field": 0.4756098839274624,
+    "train_heatmap": 2.0484249476800884,
     "train_coord": 0.0,
-    "train_physics": 0.34723141358903886
+    "train_physics": 0.3499967849470283
   },
   {
     "epoch": 33,
-    "train_total": 1.985763012317189,
-    "train_field": 0.46749978107318546,
-    "train_heatmap": 1.4824247088348657,
+    "train_total": 2.517797039266218,
+    "train_field": 0.4586521894262548,
+    "train_heatmap": 2.0237227301848564,
     "train_coord": 0.0,
-    "train_physics": 0.35838512464818595
+    "train_physics": 0.35422112242106285
   },
   {
     "epoch": 34,
-    "train_total": 1.9978877682434886,
-    "train_field": 0.46235066809152303,
-    "train_heatmap": 1.5003782385273983,
+    "train_total": 2.554616974111189,
+    "train_field": 0.46200328960753323,
+    "train_heatmap": 2.0577991447950663,
     "train_coord": 0.0,
-    "train_physics": 0.35158873457674
+    "train_physics": 0.3481454931714229
   },
   {
     "epoch": 35,
-    "train_total": 2.0047582827116313,
-    "train_field": 0.4686548139965325,
-    "train_heatmap": 1.499732242341627,
+    "train_total": 2.547486397258022,
+    "train_field": 0.46049757118810686,
+    "train_heatmap": 2.052017377133955,
     "train_coord": 0.0,
-    "train_physics": 0.3637121686540348
+    "train_physics": 0.3497145283975426
   },
   {
     "epoch": 36,
-    "train_total": 1.9817485432875783,
-    "train_field": 0.4646779607262528,
-    "train_heatmap": 1.481516473125993,
+    "train_total": 2.4968757420255425,
+    "train_field": 0.4586629224450965,
+    "train_heatmap": 2.002843417619404,
     "train_coord": 0.0,
-    "train_physics": 0.35554114931361064
+    "train_physics": 0.3536939785954657
   },
   {
     "epoch": 37,
-    "train_total": 1.9679543658306724,
-    "train_field": 0.45785367175152425,
-    "train_heatmap": 1.4720500561228969,
+    "train_total": 2.4693195840768647,
+    "train_field": 0.45262275819192854,
+    "train_heatmap": 1.9798175431134408,
     "train_coord": 0.0,
-    "train_physics": 0.3805064513315365
+    "train_physics": 0.3687929053292528
   },
   {
     "epoch": 38,
-    "train_total": 1.9963942222427904,
-    "train_field": 0.4746042599803523,
-    "train_heatmap": 1.4850902599200868,
+    "train_total": 2.503141342547902,
+    "train_field": 0.45853981689402934,
+    "train_heatmap": 2.008734961350759,
     "train_coord": 0.0,
-    "train_physics": 0.3669969984003457
+    "train_physics": 0.3586655464268437
   },
   {
     "epoch": 39,
-    "train_total": 1.9757692604734187,
-    "train_field": 0.47510932150639984,
-    "train_heatmap": 1.4648422870719642,
+    "train_total": 2.490643359067147,
+    "train_field": 0.45281878113746643,
+    "train_heatmap": 2.002247329343829,
     "train_coord": 0.0,
-    "train_physics": 0.3581764273704928
+    "train_physics": 0.3557724755241029
   },
   {
     "epoch": 40,
-    "train_total": 1.9472157725116663,
-    "train_field": 0.45688263418381675,
-    "train_heatmap": 1.4541866266936587,
+    "train_total": 2.4520778509608485,
+    "train_field": 0.4523105647480279,
+    "train_heatmap": 1.964596200407597,
     "train_coord": 0.0,
-    "train_physics": 0.36146496269002293
+    "train_physics": 0.3517109264676835
   },
   {
     "epoch": 41,
-    "train_total": 1.9284801211273461,
-    "train_field": 0.45030611230615986,
-    "train_heatmap": 1.443205526000575,
+    "train_total": 2.4791211349922313,
+    "train_field": 0.45576131030132894,
+    "train_heatmap": 1.988341341938889,
     "train_coord": 0.0,
-    "train_physics": 0.3496848656836766
+    "train_physics": 0.35018477922615904
   },
   {
     "epoch": 42,
-    "train_total": 1.9533885612822415,
-    "train_field": 0.4586867982881111,
-    "train_heatmap": 1.4580463118720473,
+    "train_total": 2.519250430558857,
+    "train_field": 0.4591475793144159,
+    "train_heatmap": 2.0238784656190036,
     "train_coord": 0.0,
-    "train_physics": 0.36655465023706485
+    "train_physics": 0.36224368067147833
   },
   {
     "epoch": 43,
-    "train_total": 1.978585490009241,
-    "train_field": 0.47921729140114366,
-    "train_heatmap": 1.4633767259748358,
+    "train_total": 2.525325574372944,
+    "train_field": 0.491297945118787,
+    "train_heatmap": 1.9983065483862894,
     "train_coord": 0.0,
-    "train_physics": 0.359914754394834
+    "train_physics": 0.35721073398497283
   },
   {
     "epoch": 44,
-    "train_total": 1.9505823453267415,
-    "train_field": 0.4720170686119481,
-    "train_heatmap": 1.4427771014079713,
+    "train_total": 2.466786455689815,
+    "train_field": 0.46705020362870736,
+    "train_heatmap": 1.964775420071786,
     "train_coord": 0.0,
-    "train_physics": 0.35788195380908355
+    "train_physics": 0.34960834703228455
   },
   {
     "epoch": 45,
-    "train_total": 1.9710803429285686,
-    "train_field": 0.45038983434961555,
-    "train_heatmap": 1.4860562943575675,
+    "train_total": 2.474261078918189,
+    "train_field": 0.4534242634187665,
+    "train_heatmap": 1.9859982279309056,
     "train_coord": 0.0,
-    "train_physics": 0.3463420013022985
+    "train_physics": 0.34838576342199784
   },
   {
     "epoch": 46,
-    "train_total": 1.9530531063414456,
-    "train_field": 0.45405742996617365,
-    "train_heatmap": 1.463159279865131,
+    "train_total": 2.450631200221547,
+    "train_field": 0.4467875047733909,
+    "train_heatmap": 1.9675146477264271,
     "train_coord": 0.0,
-    "train_physics": 0.35836399477097747
+    "train_physics": 0.36329057669520315
   },
   {
     "epoch": 47,
-    "train_total": 1.934987463449177,
-    "train_field": 0.4697617684539996,
-    "train_heatmap": 1.429939195775149,
+    "train_total": 2.485965787318715,
+    "train_field": 0.47758093580865024,
+    "train_heatmap": 1.97270905762388,
     "train_coord": 0.0,
-    "train_physics": 0.3528649875355002
+    "train_physics": 0.356757818214726
   },
   {
     "epoch": 48,
-    "train_total": 1.9103936730769642,
-    "train_field": 0.44880189079987376,
-    "train_heatmap": 1.425946855754183,
+    "train_total": 2.4439346685744168,
+    "train_field": 0.4492938074103573,
+    "train_heatmap": 1.959207344473454,
     "train_coord": 0.0,
-    "train_physics": 0.35644922565603465
+    "train_physics": 0.3543351970024799
   },
   {
     "epoch": 49,
-    "train_total": 1.9116538302940236,
-    "train_field": 0.4471990853025202,
-    "train_heatmap": 1.4257640713139583,
+    "train_total": 2.43288849320328,
+    "train_field": 0.4501849250835285,
+    "train_heatmap": 1.9450579944409823,
     "train_coord": 0.0,
-    "train_physics": 0.38690665462707874
+    "train_physics": 0.37645570042526777
   },
   {
     "epoch": 50,
-    "train_total": 1.921770315421255,
-    "train_field": 0.44860955759098653,
-    "train_heatmap": 1.4370332151128535,
+    "train_total": 2.518845054141262,
+    "train_field": 0.46455280613480954,
+    "train_heatmap": 2.0183518957673456,
     "train_coord": 0.0,
-    "train_physics": 0.3612754170072118
+    "train_physics": 0.359403605156235
   },
   {
     "epoch": 51,
-    "train_total": 1.9260284984320926,
-    "train_field": 0.46617087042122557,
-    "train_heatmap": 1.4245337049166362,
+    "train_total": 2.4381979557505824,
+    "train_field": 0.45015822952253776,
+    "train_heatmap": 1.9523986483875073,
     "train_coord": 0.0,
-    "train_physics": 0.35323936165220576
+    "train_physics": 0.35641091892275173
   },
   {
     "epoch": 52,
-    "train_total": 1.8844323032780697,
-    "train_field": 0.44407753724800914,
-    "train_heatmap": 1.4046316857923542,
+    "train_total": 2.4259840103617885,
+    "train_field": 0.4530298223620967,
+    "train_heatmap": 1.9374009977307236,
     "train_coord": 0.0,
-    "train_physics": 0.3572308054896431
+    "train_physics": 0.3555318019883871
   },
   {
     "epoch": 53,
-    "train_total": 1.8928547783901817,
-    "train_field": 0.45159963191601266,
-    "train_heatmap": 1.406477766078815,
+    "train_total": 2.4040651844258893,
+    "train_field": 0.4544166049413514,
+    "train_heatmap": 1.9144044591669451,
     "train_coord": 0.0,
-    "train_physics": 0.3477738680881693
+    "train_physics": 0.3524412202746852
   },
   {
     "epoch": 54,
-    "train_total": 1.9263734984816165,
-    "train_field": 0.4597955654587662,
-    "train_heatmap": 1.4292470729141904,
+    "train_total": 2.4108972570352387,
+    "train_field": 0.4451325117496022,
+    "train_heatmap": 1.9300500907396014,
     "train_coord": 0.0,
-    "train_physics": 0.37330850079377886
+    "train_physics": 0.3571467057376969
   },
   {
     "epoch": 55,
-    "train_total": 1.9325551024654455,
-    "train_field": 0.4679953665064092,
-    "train_heatmap": 1.4302464137997544,
+    "train_total": 2.409307866765742,
+    "train_field": 0.4512566610386497,
+    "train_heatmap": 1.9242397881390756,
     "train_coord": 0.0,
-    "train_physics": 0.34313320570314926
+    "train_physics": 0.3381141570984925
   },
   {
     "epoch": 56,
-    "train_total": 1.9044788009242009,
-    "train_field": 0.45259143856533784,
-    "train_heatmap": 1.4153941942934405,
+    "train_total": 2.426396710830822,
+    "train_field": 0.4831605998047611,
+    "train_heatmap": 1.9054874641853465,
     "train_coord": 0.0,
-    "train_physics": 0.36493175094661284
+    "train_physics": 0.3774865269967306
   },
   {
     "epoch": 57,
-    "train_total": 1.891591277038842,
-    "train_field": 0.45674684748314975,
-    "train_heatmap": 1.400569432660153,
+    "train_total": 2.388528211074963,
+    "train_field": 0.4492504706508235,
+    "train_heatmap": 1.9044056085118077,
     "train_coord": 0.0,
-    "train_physics": 0.34274988616571617
+    "train_physics": 0.3487212773363449
   },
   {
     "epoch": 58,
-    "train_total": 1.8863094124877662,
-    "train_field": 0.44012108915730525,
-    "train_heatmap": 1.4105772093722695,
+    "train_total": 2.4189090979726693,
+    "train_field": 0.4450759202764745,
+    "train_heatmap": 1.937826669007017,
     "train_coord": 0.0,
-    "train_physics": 0.3561113517764106
+    "train_physics": 0.36006506168888064
   },
   {
     "epoch": 59,
-    "train_total": 1.863315785140322,
-    "train_field": 0.4429235745940292,
-    "train_heatmap": 1.3860415063406293,
+    "train_total": 2.414929647194712,
+    "train_field": 0.46666949098570304,
+    "train_heatmap": 1.9129163633313095,
     "train_coord": 0.0,
-    "train_physics": 0.3435071187498244
+    "train_physics": 0.35343770843342337
   },
   {
     "epoch": 60,
-    "train_total": 1.857322661500228,
-    "train_field": 0.4405214906784526,
-    "train_heatmap": 1.3809388624994379,
+    "train_total": 2.3632514497690034,
+    "train_field": 0.44070897395150704,
+    "train_heatmap": 1.8868498927668522,
     "train_coord": 0.0,
-    "train_physics": 0.35862302925976874
+    "train_physics": 0.35692608081163807
   },
   {
     "epoch": 61,
-    "train_total": 1.8493857613781042,
-    "train_field": 0.4437802339854993,
-    "train_heatmap": 1.368812121843037,
+    "train_total": 2.380264344968294,
+    "train_field": 0.4374545624381618,
+    "train_heatmap": 1.9068962147361355,
     "train_coord": 0.0,
-    "train_physics": 0.3679339978292486
+    "train_physics": 0.3591356785935268
   },
   {
     "epoch": 62,
-    "train_total": 1.8731909760257655,
-    "train_field": 0.45464460996159334,
-    "train_heatmap": 1.3819548477206314,
+    "train_total": 2.424270431200663,
+    "train_field": 0.45165175408647773,
+    "train_heatmap": 1.9367597918761403,
     "train_coord": 0.0,
-    "train_physics": 0.36591527200091567
+    "train_physics": 0.3585886608711199
   },
   {
     "epoch": 63,
-    "train_total": 1.879569695706953,
-    "train_field": 0.4540707651983228,
-    "train_heatmap": 1.389507818640324,
+    "train_total": 2.3945586137604296,
+    "train_field": 0.4466823966879594,
+    "train_heatmap": 1.9117148738158376,
     "train_coord": 0.0,
-    "train_physics": 0.3599111284987119
+    "train_physics": 0.36161321551506326
   },
   {
     "epoch": 64,
-    "train_total": 1.8457709048923694,
-    "train_field": 0.4400564217776583,
-    "train_heatmap": 1.3696029834580004,
+    "train_total": 2.366823202685306,
+    "train_field": 0.44041909042157623,
+    "train_heatmap": 1.8914503528360735,
     "train_coord": 0.0,
-    "train_physics": 0.36111495292974277
+    "train_physics": 0.3495376329836354
   },
   {
     "epoch": 65,
-    "train_total": 1.8484593378870111,
-    "train_field": 0.4493667697697355,
-    "train_heatmap": 1.3647259285575466,
+    "train_total": 2.348342933152851,
+    "train_field": 0.44203662558605794,
+    "train_heatmap": 1.870870640403346,
     "train_coord": 0.0,
-    "train_physics": 0.3436663623188475
+    "train_physics": 0.354356724834233
   },
   {
     "epoch": 66,
-    "train_total": 1.9205634761274906,
-    "train_field": 0.48785227798579034,
-    "train_heatmap": 1.3979471942834687,
+    "train_total": 2.3570665246561955,
+    "train_field": 0.4387933993548678,
+    "train_heatmap": 1.8832043095638877,
     "train_coord": 0.0,
-    "train_physics": 0.3476400336765341
+    "train_physics": 0.35068806360900534
   },
   {
     "epoch": 67,
-    "train_total": 1.8819310706958436,
-    "train_field": 0.47681157630786564,
-    "train_heatmap": 1.3700763530898512,
+    "train_total": 2.3619683604491386,
+    "train_field": 0.4395857557915805,
+    "train_heatmap": 1.888006986233226,
     "train_coord": 0.0,
-    "train_physics": 0.3504312932940625
+    "train_physics": 0.3437559822280156
   },
   {
     "epoch": 68,
-    "train_total": 1.85835043380135,
-    "train_field": 0.45141242313803287,
-    "train_heatmap": 1.3694406883758412,
+    "train_total": 2.350133442042167,
+    "train_field": 0.44257208182100666,
+    "train_heatmap": 1.8703455234828747,
     "train_coord": 0.0,
-    "train_physics": 0.3749731382285653
+    "train_physics": 0.3721580572156726
   },
   {
     "epoch": 69,
-    "train_total": 1.8489668118326288,
-    "train_field": 0.44479935838465107,
-    "train_heatmap": 1.3687871569081356,
+    "train_total": 2.347746593910351,
+    "train_field": 0.4369377467715949,
+    "train_heatmap": 1.8761555196946127,
     "train_coord": 0.0,
-    "train_physics": 0.35380298470498245
+    "train_physics": 0.3465333751018829
   },
   {
     "epoch": 70,
-    "train_total": 1.831328402485764,
-    "train_field": 0.4545958507479283,
-    "train_heatmap": 1.3415255619768511,
+    "train_total": 2.3106944498262907,
+    "train_field": 0.4369262739231712,
+    "train_heatmap": 1.8392652440489383,
     "train_coord": 0.0,
-    "train_physics": 0.35206986098599274
+    "train_physics": 0.3450291683497071
   },
   {
     "epoch": 71,
-    "train_total": 1.897320316548933,
-    "train_field": 0.47346871934439005,
-    "train_heatmap": 1.3886328569629736,
+    "train_total": 2.3268059471197295,
+    "train_field": 0.4391875125859913,
+    "train_heatmap": 1.8529999559385735,
     "train_coord": 0.0,
-    "train_physics": 0.3521874231498754
+    "train_physics": 0.34618477163460565
   },
   {
     "epoch": 72,
-    "train_total": 1.825619938080771,
-    "train_field": 0.4392177295266536,
-    "train_heatmap": 1.3501081121595282,
+    "train_total": 2.31791559436865,
+    "train_field": 0.43530244105740595,
+    "train_heatmap": 1.8467906441604882,
     "train_coord": 0.0,
-    "train_physics": 0.3629410357721019
+    "train_physics": 0.3582250642214428
   },
   {
     "epoch": 73,
-    "train_total": 1.8293381030099434,
-    "train_field": 0.43687093048764947,
-    "train_heatmap": 1.3575514011215746,
+    "train_total": 2.3162809359399894,
+    "train_field": 0.4340930586321312,
+    "train_heatmap": 1.8467871515374434,
     "train_coord": 0.0,
-    "train_physics": 0.34915776135759397
+    "train_physics": 0.35400724040524084
   },
   {
     "epoch": 74,
-    "train_total": 1.8302901690466362,
-    "train_field": 0.44340268718568904,
-    "train_heatmap": 1.3510709582713611,
+    "train_total": 2.32327972169508,
+    "train_field": 0.43463322154262607,
+    "train_heatmap": 1.8527003652171086,
     "train_coord": 0.0,
-    "train_physics": 0.35816520626101184
+    "train_physics": 0.35946130910030516
   },
   {
     "epoch": 75,
-    "train_total": 1.8509510671883298,
-    "train_field": 0.44167609277524444,
-    "train_heatmap": 1.3744679082903946,
+    "train_total": 2.3346175499129713,
+    "train_field": 0.4441748512418647,
+    "train_heatmap": 1.8554930101361191,
     "train_coord": 0.0,
-    "train_physics": 0.3480706406234388
+    "train_physics": 0.3494970873733492
   },
   {
     "epoch": 76,
-    "train_total": 1.836229502109059,
-    "train_field": 0.4433565218197672,
-    "train_heatmap": 1.3569536690126385,
+    "train_total": 2.343474636998093,
+    "train_field": 0.4482205844762033,
+    "train_heatmap": 1.8599059832723517,
     "train_coord": 0.0,
-    "train_physics": 0.3591930335428435
+    "train_physics": 0.35348071476542636
   },
   {
     "epoch": 77,
-    "train_total": 1.8359363685574448,
-    "train_field": 0.44466771682103473,
-    "train_heatmap": 1.3562512638276083,
+    "train_total": 2.3366865965357997,
+    "train_field": 0.45083664592943695,
+    "train_heatmap": 1.8506307309133965,
     "train_coord": 0.0,
-    "train_physics": 0.35017399168001456
+    "train_physics": 0.3521921392530203
   },
   {
     "epoch": 78,
-    "train_total": 1.8255890691489505,
-    "train_field": 0.43513633755215425,
-    "train_heatmap": 1.3555085073437607,
+    "train_total": 2.292071721010041,
+    "train_field": 0.43275793079744307,
+    "train_heatmap": 1.8246508920401858,
     "train_coord": 0.0,
-    "train_physics": 0.34944226255378963
+    "train_physics": 0.3466289284385806
   },
   {
     "epoch": 79,
-    "train_total": 1.8290698047269855,
-    "train_field": 0.4316103097639586,
-    "train_heatmap": 1.3628399257074322,
+    "train_total": 2.3067963938964042,
+    "train_field": 0.44780349836014866,
+    "train_heatmap": 1.8250547103714525,
     "train_coord": 0.0,
-    "train_physics": 0.3461956359903541
+    "train_physics": 0.3393818792854354
   },
   {
     "epoch": 80,
-    "train_total": 1.8311998404954608,
-    "train_field": 0.43602226805268673,
-    "train_heatmap": 1.3583470582962036,
+    "train_total": 2.37137458408088,
+    "train_field": 0.4467538673626749,
+    "train_heatmap": 1.8882279626110143,
     "train_coord": 0.0,
-    "train_physics": 0.3683050168768029
+    "train_physics": 0.3639276741877231
   },
   {
     "epoch": 81,
-    "train_total": 1.8026653862836068,
-    "train_field": 0.4462178265839292,
-    "train_heatmap": 1.3207985256847583,
+    "train_total": 2.3331650955635204,
+    "train_field": 0.4427301700700793,
+    "train_heatmap": 1.8540059307165313,
     "train_coord": 0.0,
-    "train_physics": 0.35649027301840025
+    "train_physics": 0.36428999172915755
   },
   {
     "epoch": 82,
-    "train_total": 1.826061292698509,
-    "train_field": 0.4497937194088049,
-    "train_heatmap": 1.339348382071445,
+    "train_total": 2.307817241601777,
+    "train_field": 0.4382108810700868,
+    "train_heatmap": 1.8336443461869891,
     "train_coord": 0.0,
-    "train_physics": 0.3691920325682874
+    "train_physics": 0.35961998736061024
   },
   {
     "epoch": 83,
-    "train_total": 1.7949715706340053,
-    "train_field": 0.4343790129611367,
-    "train_heatmap": 1.3244400233553166,
+    "train_total": 2.3013664734990975,
+    "train_field": 0.4430227844338668,
+    "train_heatmap": 1.8227730445694506,
     "train_coord": 0.0,
-    "train_physics": 0.36152539599131334
+    "train_physics": 0.3557063256218833
   },
   {
     "epoch": 84,
-    "train_total": 1.7873674254668386,
-    "train_field": 0.43335197526111935,
-    "train_heatmap": 1.3202966085651464,
+    "train_total": 2.3000225372481764,
+    "train_field": 0.4454774129808995,
+    "train_heatmap": 1.8206935713165684,
     "train_coord": 0.0,
-    "train_physics": 0.337188381156394
+    "train_physics": 0.33851566612761336
   },
   {
     "epoch": 85,
-    "train_total": 1.7729062929488064,
-    "train_field": 0.4314739735502946,
-    "train_heatmap": 1.304994599861011,
+    "train_total": 2.299088011708176,
+    "train_field": 0.4388415484051955,
+    "train_heatmap": 1.8239460430647199,
     "train_coord": 0.0,
-    "train_physics": 0.3643770983540698
+    "train_physics": 0.3630041381540267
   },
   {
     "epoch": 86,
-    "train_total": 1.7643842613487912,
-    "train_field": 0.43666344410494756,
-    "train_heatmap": 1.292151223149216,
+    "train_total": 2.2763745638362147,
+    "train_field": 0.43318963573690045,
+    "train_heatmap": 1.8079495649588735,
     "train_coord": 0.0,
-    "train_physics": 0.355695937294513
+    "train_physics": 0.35235362515780716
   },
   {
     "epoch": 87,
-    "train_total": 1.7849306370082654,
-    "train_field": 0.4315323813965446,
-    "train_heatmap": 1.3170492565422727,
+    "train_total": 2.2544291918737844,
+    "train_field": 0.4304873044030708,
+    "train_heatmap": 1.788026826423511,
     "train_coord": 0.0,
-    "train_physics": 0.3634900286111556
+    "train_physics": 0.35915077370060444
   },
   {
     "epoch": 88,
-    "train_total": 1.7881823610841183,
-    "train_field": 0.4375323752562205,
-    "train_heatmap": 1.3155758799168102,
+    "train_total": 2.291339732052987,
+    "train_field": 0.44528269192628694,
+    "train_heatmap": 1.8115512550922863,
     "train_coord": 0.0,
-    "train_physics": 0.3507411569732715
+    "train_physics": 0.345057744234637
   },
   {
     "epoch": 89,
-    "train_total": 1.7938524191839653,
-    "train_field": 0.4373425198228736,
-    "train_heatmap": 1.3209251405899984,
+    "train_total": 2.3300984930573847,
+    "train_field": 0.4657797426508184,
+    "train_heatmap": 1.828960698947572,
     "train_coord": 0.0,
-    "train_physics": 0.3558476315525344
+    "train_physics": 0.35358046819946093
   },
   {
     "epoch": 90,
-    "train_total": 1.771377826991834,
-    "train_field": 0.43730640097668294,
-    "train_heatmap": 1.29770781282793,
+    "train_total": 2.282850380529437,
+    "train_field": 0.4482021933062035,
+    "train_heatmap": 1.7992733581024303,
     "train_coord": 0.0,
-    "train_physics": 0.36363626292726975
+    "train_physics": 0.3537482735496668
   },
   {
     "epoch": 91,
-    "train_total": 1.7743367374989025,
-    "train_field": 0.4365602465052354,
-    "train_heatmap": 1.3029028428228278,
+    "train_total": 2.275788480775398,
+    "train_field": 0.43248358682582255,
+    "train_heatmap": 1.8086170167253728,
     "train_coord": 0.0,
-    "train_physics": 0.34873647712122063
+    "train_physics": 0.34687868450572223
   },
   {
     "epoch": 92,
-    "train_total": 1.759217151424341,
-    "train_field": 0.44715777300951776,
-    "train_heatmap": 1.2766567426815367,
+    "train_total": 2.2371592082475362,
+    "train_field": 0.4296679177828002,
+    "train_heatmap": 1.772089513770321,
     "train_coord": 0.0,
-    "train_physics": 0.3540263667972268
+    "train_physics": 0.3540178855734044
   },
   {
     "epoch": 93,
-    "train_total": 1.786120006912633,
-    "train_field": 0.439458020423588,
-    "train_heatmap": 1.3099847843772487,
+    "train_total": 2.2555471679620576,
+    "train_field": 0.4274470659724453,
+    "train_heatmap": 1.7921145307390314,
     "train_coord": 0.0,
-    "train_physics": 0.36677203610081943
+    "train_physics": 0.35985571733398136
   },
   {
     "epoch": 94,
-    "train_total": 1.8133904139200847,
-    "train_field": 0.4492517014344533,
-    "train_heatmap": 1.3275988154244005,
+    "train_total": 2.255375494036758,
+    "train_field": 0.4299570457977161,
+    "train_heatmap": 1.7895669236517788,
     "train_coord": 0.0,
-    "train_physics": 0.36539884764096586
+    "train_physics": 0.3585152574814856
   },
   {
     "epoch": 95,
-    "train_total": 1.7992285594605564,
-    "train_field": 0.4443789846018741,
-    "train_heatmap": 1.319829497420997,
+    "train_total": 2.2587301982076546,
+    "train_field": 0.4292441334640771,
+    "train_heatmap": 1.7952371731139065,
     "train_coord": 0.0,
-    "train_physics": 0.3502008286692823
+    "train_physics": 0.34248870956760485
   },
   {
     "epoch": 96,
-    "train_total": 1.7743489407656485,
-    "train_field": 0.43509876152925325,
-    "train_heatmap": 1.3033498306023448,
+    "train_total": 2.239046345677292,
+    "train_field": 0.42681145668029785,
+    "train_heatmap": 1.777467499699509,
     "train_coord": 0.0,
-    "train_physics": 0.35900363662247464
+    "train_physics": 0.3476739140235606
   },
   {
     "epoch": 97,
-    "train_total": 1.74785680310768,
-    "train_field": 0.43955723235481664,
-    "train_heatmap": 1.2724474605761076,
+    "train_total": 2.2478790325030946,
+    "train_field": 0.4290564577830465,
+    "train_heatmap": 1.7829553244406717,
     "train_coord": 0.0,
-    "train_physics": 0.35852102755993737
+    "train_physics": 0.35867255702696477
   },
   {
     "epoch": 98,
-    "train_total": 1.7698480058134647,
-    "train_field": 0.437818099532211,
-    "train_heatmap": 1.2970311181587086,
+    "train_total": 2.236804730013797,
+    "train_field": 0.42646104358790216,
+    "train_heatmap": 1.7758114965338456,
     "train_coord": 0.0,
-    "train_physics": 0.34998790784167094
+    "train_physics": 0.3453220617712328
   },
   {
     "epoch": 99,
-    "train_total": 1.7764687768199987,
-    "train_field": 0.434879624007041,
-    "train_heatmap": 1.3061993393981666,
+    "train_total": 2.2710064816893194,
+    "train_field": 0.429776972845981,
+    "train_heatmap": 1.8052895184148823,
     "train_coord": 0.0,
-    "train_physics": 0.3538982064806317
+    "train_physics": 0.35939994684763643
   }
 ]
