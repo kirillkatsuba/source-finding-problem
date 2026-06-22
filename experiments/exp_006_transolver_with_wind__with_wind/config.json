@@ -9,6 +9,7 @@
   "heatmap_sigma": 4.0,
   "smooth_sigma": 2.0,
   "include_wind": true,
+  "wind_per_frame": true,
   "comet": true,
   "name": "sakhalin_with_wind",
   "out_suffix": "with_wind",
