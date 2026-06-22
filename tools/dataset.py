@@ -78,7 +78,8 @@ def _load_nsk_samples(path: pathlib.Path) -> list[Sample]:
 
 def _load_sakhalin_samples(path: pathlib.Path,
                            bottom_top: int = 0,
-                           wind_dir: pathlib.Path = WIND_DIR) -> list[Sample]:
+                           wind_dir: pathlib.Path = WIND_DIR,
+                           wind_per_frame: bool = False) -> list[Sample]:
     samples: list[Sample] = []
     wind_path = wind_path_for(path, wind_dir=wind_dir)
     with xr.open_dataset(path) as ds:
@@ -89,9 +90,15 @@ def _load_sakhalin_samples(path: pathlib.Path,
     wind_arr: np.ndarray | None = None
     if wind_path is not None:
         with xr.open_dataset(wind_path) as wds:
-            u = wds["U10"].isel(Time=0).values.astype(np.float32)
-            v = wds["V10"].isel(Time=0).values.astype(np.float32)
-        wind_arr = np.stack([u, v], axis=0)  # (2, H, W)
+            if wind_per_frame:
+                # ветер по кадрам t=1..17 (выровнен с field_input); группировка [U_1..U_T, V_1..V_T]
+                u = wds["U10"].isel(Time=slice(1, None)).values.astype(np.float32)  # (T, H, W)
+                v = wds["V10"].isel(Time=slice(1, None)).values.astype(np.float32)
+                wind_arr = np.concatenate([u, v], axis=0)  # (2T, H, W)
+            else:
+                u = wds["U10"].isel(Time=0).values.astype(np.float32)
+                v = wds["V10"].isel(Time=0).values.astype(np.float32)
+                wind_arr = np.stack([u, v], axis=0)  # (2, H, W)
 
     for s in range(n_releases):
         cube = conc[:, 0, s, :, :].astype(np.float32, copy=False)  # (18, H, W)
@@ -121,21 +128,25 @@ class SourceDataset(Dataset):
                  source_indices: list[int] | None = None,
                  augment: AugConfig | None = None,
                  norm_stats: NormStats | None = None,
+                 wind_per_frame: bool = False,
                  seed: int = 0):
         if dataset_kind not in {"nsk", "sakhalin"}:
             raise ValueError(f"unknown dataset_kind={dataset_kind!r}")
         self.dataset_kind = dataset_kind
         self.heatmap_sigma = heatmap_sigma
         self.include_wind = include_wind and dataset_kind == "sakhalin"
+        self.wind_per_frame = wind_per_frame
         self.augment = augment
         self.norm_stats = norm_stats
         self._rng = random.Random(seed)
 
-        loader = _load_nsk_samples if dataset_kind == "nsk" else _load_sakhalin_samples
         self.samples: list[Sample] = []
         iterator = files if quiet else tqdm(files, desc=f"load {dataset_kind}")
         for p in iterator:
-            self.samples.extend(loader(p))
+            if dataset_kind == "nsk":
+                self.samples.extend(_load_nsk_samples(p))
+            else:
+                self.samples.extend(_load_sakhalin_samples(p, wind_per_frame=wind_per_frame))
 
         if source_indices is not None:
             keep = set(source_indices)
@@ -233,10 +244,11 @@ def transolver_inputs(batch: dict[str, torch.Tensor]) -> tuple[torch.Tensor, tor
 
 
 def transolver_inputs_with_wind(batch: dict[str, torch.Tensor]) -> tuple[torch.Tensor, torch.Tensor]:
-    # как transolver_inputs, но fx -> (B, H*W, T_in + 2) с каналами ветра
+    # как transolver_inputs, но fx -> (B, H*W, T_in + C_wind) с каналами ветра
+    # C_wind = 2 (один кадр) или 2*T_in (покадровый ветер)
     pos, fx = transolver_inputs(batch)
     wind = batch["wind"]
-    b, _, h, w = wind.shape
-    wind_flat = wind.permute(0, 2, 3, 1).reshape(b, h * w, 2)
+    b, c, h, w = wind.shape
+    wind_flat = wind.permute(0, 2, 3, 1).reshape(b, h * w, c)
     fx = torch.cat([fx, wind_flat], dim=-1).contiguous()
     return pos, fx

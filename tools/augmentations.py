@@ -73,7 +73,8 @@ def apply_augmentation(sample: dict,
         if wind is not None:
             wind, _ = _flip_h(wind, 0, w)
             wind = wind.copy()
-            wind[0] = -wind[0]   # U меняет знак
+            n = wind.shape[0] // 2
+            wind[:n] = -wind[:n]   # U-каналы меняют знак
 
     if cfg.flip_v and rng.random() < 0.5:
         field_input, _ = _flip_v(field_input, y, h)
@@ -83,7 +84,8 @@ def apply_augmentation(sample: dict,
         if wind is not None:
             wind, _ = _flip_v(wind, 0, h)
             wind = wind.copy()
-            wind[1] = -wind[1]   # V меняет знак
+            n = wind.shape[0] // 2
+            wind[n:] = -wind[n:]   # V-каналы меняют знак
 
     if cfg.rot90 and h == w:
         k = rng.randint(0, 3)
@@ -94,13 +96,14 @@ def apply_augmentation(sample: dict,
             if wind is not None:
                 # поворот вектора (U, V): k=1 -> (-V,U), k=2 -> (-U,-V), k=3 -> (V,-U)
                 rot_wind, _, _, _, _ = _rot90(wind, 0, 0, h, w, k)
-                u_old, v_old = rot_wind[0].copy(), rot_wind[1].copy()
+                n = rot_wind.shape[0] // 2
+                u_old, v_old = rot_wind[:n].copy(), rot_wind[n:].copy()
                 if k == 1:
-                    rot_wind[0], rot_wind[1] = -v_old, u_old
+                    rot_wind[:n], rot_wind[n:] = -v_old, u_old
                 elif k == 2:
-                    rot_wind[0], rot_wind[1] = -u_old, -v_old
+                    rot_wind[:n], rot_wind[n:] = -u_old, -v_old
                 else:
-                    rot_wind[0], rot_wind[1] = v_old, -u_old
+                    rot_wind[:n], rot_wind[n:] = v_old, -u_old
                 wind = rot_wind
             x, y = x_i, y_i
 

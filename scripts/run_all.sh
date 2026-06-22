@@ -86,7 +86,7 @@ poetry run python experiments/exp_006_transolver_with_wind/train.py \
 echo ">>> exp_006 Transolver + heatmap + wind (sakhalin)"
 poetry run python experiments/exp_006_transolver_with_wind/train.py \
     --epochs "$EPOCHS" --batch-size 4 --lr "$LR" \
-    --include-wind --augment --rot90 --normalize \
+    --include-wind --wind-per-frame --augment --rot90 --normalize \
     --name "sakhalin_with_wind" --out-suffix "with_wind" $SPLIT_FLAGS $TRANSLATE_FLAGS $EXTRA_FLAGS
 
 echo ">>> exp_007 PINN (sakhalin, advection-diffusion loss)"

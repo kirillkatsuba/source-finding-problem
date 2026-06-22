@@ -29,7 +29,11 @@ def main() -> None:
     if ctx.args.dataset != "sakhalin":
         raise RuntimeError("exp_006 requires --dataset sakhalin (only files with wind)")
 
-    extra = 2 if ctx.args.include_wind else 0
+    # покадровый ветер -> 2*T_in каналов (U_1..U_T, V_1..V_T), иначе один кадр -> 2
+    if ctx.args.include_wind:
+        extra = 2 * ctx.train_set.T_in if ctx.args.wind_per_frame else 2
+    else:
+        extra = 0
     forward = (lambda model, batch: model(*transolver_inputs_with_wind(batch))) if ctx.args.include_wind \
         else (lambda model, batch: model(*transolver_inputs(batch)))
 

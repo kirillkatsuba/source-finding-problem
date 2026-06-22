@@ -50,6 +50,7 @@ def add_common_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--heatmap-sigma", type=float, default=4.0)
     parser.add_argument("--smooth-sigma", type=float, default=2.0)
     parser.add_argument("--include-wind", action="store_true")
+    parser.add_argument("--wind-per-frame", action="store_true")
     parser.add_argument("--comet", action="store_true")
     parser.add_argument("--name", type=str, default=None)
     parser.add_argument("--out-suffix", type=str, default=None)
@@ -94,6 +95,7 @@ def setup_experiment(parser: argparse.ArgumentParser, default_name: str,
         dataset_kind=args.dataset,
         heatmap_sigma=args.heatmap_sigma,
         include_wind=args.include_wind,
+        wind_per_frame=args.wind_per_frame,
     )
     aug_on = args.augment or args.rot90 or args.translate
     aug_cfg = AugConfig(flip_h=args.augment, flip_v=args.augment, rot90=args.rot90,
