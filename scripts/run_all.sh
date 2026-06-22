@@ -10,45 +10,12 @@ EXTRA_FLAGS="$@"
 EPOCHS=${EPOCHS:-100}
 BS=${BS:-8}
 LR=${LR:-1e-3}
-DATA_URL=${DATA_URL:-"https://disk.360.yandex.ru/d/CmNttY9n4c3EdA"}
 # по умолчанию file-split + трансляция (случайный сдвиг источника каждую эпоху)
 # для source-disjoint split: SPLIT_FLAGS=--source-split bash scripts/run_all.sh
 SPLIT_FLAGS=${SPLIT_FLAGS:-}
 TRANSLATE_FLAGS=${TRANSLATE_FLAGS:---translate}
 
-# Тянем data.tar.gz с публичной ссылки Yandex Disk, если данных еще нет.
-fetch_data() {
-    if ls data/pollution/*.nc >/dev/null 2>&1; then
-        echo "data: already present, skip download"
-        return
-    fi
-    local api="https://cloud-api.yandex.net/v1/disk/public/resources/download?public_key=${DATA_URL}"
-    local href
-    href=$(curl -sL "$api" | python3 -c "import sys, json; print(json.load(sys.stdin)['href'])") || true
-    if [ -z "$href" ]; then
-        echo "data: failed to resolve download url" >&2
-        exit 1
-    fi
-    echo "data: downloading archive"
-    curl -L -o data.tar.gz "$href"
-    rm -rf _unpack && mkdir -p data _unpack
-    tar -xzf data.tar.gz -C _unpack
-    # архив может быть как 'pollution/ wind/', так и 'data/...'
-    local pol win
-    pol=$(find _unpack -type d -name pollution | head -1)
-    win=$(find _unpack -type d -name wind | head -1)
-    if [ -z "$pol" ] || [ -z "$win" ]; then
-        echo "data: pollution/ or wind/ not found in archive" >&2
-        exit 1
-    fi
-    rm -rf data/pollution data/wind
-    mv "$pol" data/pollution
-    mv "$win" data/wind
-    rm -rf _unpack data.tar.gz
-    echo "data: pollution=$(ls data/pollution/*.nc | wc -l) wind=$(ls data/wind/*.nc | wc -l)"
-}
-
-fetch_data
+bash scripts/fetch_data.sh
 poetry run python -c "import torch; print('torch', torch.__version__, 'cuda', torch.cuda.is_available())"
 
 echo ">>> exp_000 trivial"
