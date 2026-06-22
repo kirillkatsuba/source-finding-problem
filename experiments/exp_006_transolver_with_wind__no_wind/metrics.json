@@ -1,7 +1,7 @@
 {
-  "mean_error": 4.761184215545654,
-  "median_error": 1.4142135381698608,
-  "std_error": 13.99866771697998,
-  "mean_smooth_error": 3.4342963695526123,
+  "mean_error": 3.5057153701782227,
+  "median_error": 2.0,
+  "std_error": 7.393059253692627,
+  "mean_smooth_error": 2.446647882461548,
   "n": 57
 }

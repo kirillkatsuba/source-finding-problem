@@ -7,18 +7,18 @@ Each row is one method on one dataset. Metric is Euclidean error in grid cells
 
 | method | mean err | median | std | smooth mean | n |
 | --- | --- | --- | --- | --- | --- |
-| UNet baseline | 1.36 | 1.00 | 0.93 | 1.34 | 100 |
-| Transolver + Heatmap (multi-task) | 4.99 | 2.24 | 10.30 | 3.77 | 100 |
-| Transolver (field only) | 15.51 | 11.44 | 12.41 | 20.61 | 100 |
-| Transolver + Regressor (multi-task) | 15.89 | 14.82 | 8.14 | 15.89 | 100 |
+| UNet baseline | 1.62 | 1.41 | 1.17 | 1.49 | 100 |
+| Transolver + Heatmap (multi-task) | 3.55 | 2.83 | 4.20 | 2.08 | 100 |
+| Transolver (field only) | 16.25 | 13.15 | 12.24 | 21.04 | 100 |
+| Transolver + Regressor (multi-task) | 20.32 | 17.59 | 12.52 | 20.32 | 100 |
 | Trivial baseline (argmax t=17) | 22.35 | 17.13 | 21.91 | 29.85 | 100 |
 
 ## Dataset: sakhalin
 
 | method | mean err | median | std | smooth mean | n |
 | --- | --- | --- | --- | --- | --- |
-| Transolver + Heatmap + Wind [with_wind] | 2.71 | 2.24 | 1.52 | 2.03 | 57 |
-| PINN (advection-diffusion loss) | 3.98 | 2.24 | 13.66 | 1.56 | 57 |
-| Transolver + Heatmap + Wind [no_wind] | 4.76 | 1.41 | 14.00 | 3.43 | 57 |
+| PINN (advection-diffusion loss) | 2.56 | 2.24 | 1.49 | 1.64 | 57 |
+| Transolver + Heatmap + Wind [no_wind] | 3.51 | 2.00 | 7.39 | 2.45 | 57 |
+| Transolver + Heatmap + Wind [with_wind] | 3.78 | 3.16 | 5.54 | 1.48 | 57 |
 | Trivial baseline (argmax t=17) | 6.60 | 2.24 | 14.91 | 7.89 | 57 |
 | Physical baseline (backward advection) | 20.45 | 13.60 | 21.18 | 17.48 | 57 |

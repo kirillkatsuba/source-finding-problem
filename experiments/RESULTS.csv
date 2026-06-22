@@ -1,11 +1,11 @@
 experiment,display,dataset,mean_error_cells,median_error_cells,std_error_cells,mean_smooth_error_cells,n_samples,metrics_path
-exp_005_unet_baseline,UNet baseline,nsk,1.3594727516174316,1.0,0.9283499121665955,1.3383506536483765,100,experiments/exp_005_unet_baseline/metrics.json
-exp_003_transolver_heatmap_multitask,Transolver + Heatmap (multi-task),nsk,4.986453056335449,2.2360680103302,10.303167343139648,3.7693307399749756,100,experiments/exp_003_transolver_heatmap_multitask/metrics.json
-exp_002_transolver,Transolver (field only),nsk,15.514026641845703,11.442520141601562,12.405439376831055,20.607927322387695,100,experiments/exp_002_transolver/metrics.json
-exp_004_transolver_regressor_multitask,Transolver + Regressor (multi-task),nsk,15.887345314025879,14.815445899963379,8.13770580291748,15.887345314025879,100,experiments/exp_004_transolver_regressor_multitask/metrics.json
+exp_005_unet_baseline,UNet baseline,nsk,1.6201673746109009,1.4142135381698608,1.1683567762374878,1.4922617673873901,100,experiments/exp_005_unet_baseline/metrics.json
+exp_003_transolver_heatmap_multitask,Transolver + Heatmap (multi-task),nsk,3.551713228225708,2.8284270763397217,4.200634956359863,2.084916353225708,100,experiments/exp_003_transolver_heatmap_multitask/metrics.json
+exp_002_transolver,Transolver (field only),nsk,16.245891571044922,13.152946472167969,12.23646354675293,21.03866958618164,100,experiments/exp_002_transolver/metrics.json
+exp_004_transolver_regressor_multitask,Transolver + Regressor (multi-task),nsk,20.32318878173828,17.592330932617188,12.521100997924805,20.32318878173828,100,experiments/exp_004_transolver_regressor_multitask/metrics.json
 exp_000_trivial,Trivial baseline (argmax t=17),nsk,22.350292205810547,17.131338119506836,21.907861709594727,29.849241256713867,100,experiments/exp_000_trivial/nsk/metrics.json
-exp_006_transolver_with_wind__with_wind,Transolver + Heatmap + Wind [with_wind],sakhalin,2.709383726119995,2.2360680103302,1.5193294286727905,2.026048421859741,57,experiments/exp_006_transolver_with_wind__with_wind/metrics.json
-exp_007_pinn,PINN (advection-diffusion loss),sakhalin,3.9822371006011963,2.2360680103302,13.661369323730469,1.5572084188461304,57,experiments/exp_007_pinn/metrics.json
-exp_006_transolver_with_wind__no_wind,Transolver + Heatmap + Wind [no_wind],sakhalin,4.761184215545654,1.4142135381698608,13.99866771697998,3.4342963695526123,57,experiments/exp_006_transolver_with_wind__no_wind/metrics.json
+exp_007_pinn,PINN (advection-diffusion loss),sakhalin,2.5607614517211914,2.2360680103302,1.488095760345459,1.6361654996871948,57,experiments/exp_007_pinn/metrics.json
+exp_006_transolver_with_wind__no_wind,Transolver + Heatmap + Wind [no_wind],sakhalin,3.5057153701782227,2.0,7.393059253692627,2.446647882461548,57,experiments/exp_006_transolver_with_wind__no_wind/metrics.json
+exp_006_transolver_with_wind__with_wind,Transolver + Heatmap + Wind [with_wind],sakhalin,3.775635242462158,3.1622776985168457,5.540031433105469,1.47946035861969,57,experiments/exp_006_transolver_with_wind__with_wind/metrics.json
 exp_000_trivial,Trivial baseline (argmax t=17),sakhalin,6.595216751098633,2.2360680103302,14.908303260803223,7.891339302062988,57,experiments/exp_000_trivial/sakhalin/metrics.json
 exp_001_baseline,Physical baseline (backward advection),sakhalin,20.451011657714844,13.601470947265625,21.181381225585938,17.48468780517578,57,experiments/exp_001_baseline/sakhalin_unified/metrics.json
