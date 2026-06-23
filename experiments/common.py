@@ -130,7 +130,7 @@ def setup_experiment(parser: argparse.ArgumentParser, default_name: str,
         try:
             from comet_ml import Experiment as _Exp
             experiment = _Exp()
-            experiment.set_name(args.name or default_name)
+            experiment.set_name(args.name or out_name)
             experiment.log_parameters(vars(args))
         except Exception as e:
             print(f"comet disabled: {e}")
