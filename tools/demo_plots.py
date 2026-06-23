@@ -37,6 +37,7 @@ METHODS = {
     "nowind":     ("exp_006_transolver_with_wind__no_wind",   "sakhalin"),
     "wind":       ("exp_006_transolver_with_wind__with_wind", "sakhalin"),
     "pinn":       ("exp_007_pinn",                            "sakhalin"),
+    "pinn_nopde": ("exp_007_pinn__nopde",                     "sakhalin"),
 }
 
 _cache: dict = {}

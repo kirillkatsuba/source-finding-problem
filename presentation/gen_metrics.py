@@ -20,6 +20,7 @@ RUNS = {
     "exp_006_transolver_with_wind__no_wind":   "WindNo",
     "exp_006_transolver_with_wind__with_wind": "WindYes",
     "exp_007_pinn":                            "Pinn",
+    "exp_007_pinn__nopde":                     "PinnNoPde",
 }
 
 

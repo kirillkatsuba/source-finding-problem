@@ -61,6 +61,12 @@ poetry run python experiments/exp_007_pinn/train.py \
     --epochs "$EPOCHS" --batch-size 4 --lr "$LR" \
     --augment --rot90 --normalize --w-physics 0.1 $SPLIT_FLAGS $TRANSLATE_FLAGS $EXTRA_FLAGS
 
+echo ">>> exp_007 PINN control: no PDE loss (w_physics=0, same model/inputs)"
+poetry run python experiments/exp_007_pinn/train.py \
+    --epochs "$EPOCHS" --batch-size 4 --lr "$LR" \
+    --augment --rot90 --normalize --w-physics 0 \
+    --out-suffix nopde $SPLIT_FLAGS $TRANSLATE_FLAGS $EXTRA_FLAGS
+
 echo ">>> aggregate + plots"
 poetry run python experiments/aggregate.py
 poetry run python experiments/plots.py
