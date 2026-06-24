@@ -52,3 +52,25 @@ references/
 data.tar.gz
 
 presentation/res/
+
+# --- LaTeX build artifacts ---
+*.aux
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.out
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.idx
+*.ind
+*.ilg
+out/

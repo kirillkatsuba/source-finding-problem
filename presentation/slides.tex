@@ -272,7 +272,7 @@
         \node[vbb, below=of a](b){Transolver $\to$ $C_{t=0}$};
         \node[vop, below=of b](c){Conv $3{\times}3$,\ $1\!\to\!64$,\ GELU};
         \node[vop, below=of c](d){Conv $3{\times}3$,\ $64\!\to\!64$,\ GELU\ ($\times2$)};
-        \node[vop, below=of d](e){AvgPool $8$ $\to$ Linear $128$ $\to$ Linear $2$};
+        \node[vop, below=of d](e){AdaptiveAvgPool2d(8) $\to$ Linear $128$ $\to$ Linear $2$};
         \node[vio, below=of e](f){source $=(x,y)$};
         \draw[var](a)--(b); \draw[var](b)--(c); \draw[var](c)--(d);
         \draw[var](d)--(e); \draw[var](e)--(f);
@@ -290,7 +290,7 @@
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.5\textwidth}
       \textbf{Функция потерь:}
-      \[ \mathcal{L} = \mathcal{L}_{\text{field}} + \mathcal{L}_{\text{heat}} \]
+      \[ \mathcal{L} = \mathcal{L}_{\text{heat}} \]
 
       \vspace{0.6em}
       \textbf{Ошибка на тесте:}
@@ -357,33 +357,6 @@
   \centering\includegraphics[width=1\textwidth]{demo_wind.png}
 \end{frame}
 
-\begin{frame}{PINN --- архитектура}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.5\textwidth}
-      \textbf{Функция потерь:}
-      \[ \mathcal{L} = \mathcal{L}_{\text{field}} + \mathcal{L}_{\text{heat}} + 0.1\,\mathcal{L}_{\text{PDE}} \]
-
-      \vspace{0.6em}
-      \textbf{Ошибка на тесте:}
-      \begin{itemize}
-        \item без сглаживания --- \textbf{\mPinnMean}
-        \item со сглаживанием --- \textbf{\mPinnSmooth}
-      \end{itemize}
-    \end{column}
-    \begin{column}{0.45\textwidth}
-      \centering
-      \begin{tikzpicture}[node distance=2.4mm]
-        \node[vio](a){$[C_{t=1}, \dots, C_{t=17}]$ \ ($17{\times}H{\times}W$)};
-        \node[vop, below=of a](b){Conv $3{\times}3$,\ $17\!\to\!64$,\ GELU};
-        \node[vop, below=of b](c){Conv $3{\times}3$,\ $64\!\to\!64$,\ GELU\ ($\times3$)};
-        \node[vop, below=of c](d){Conv $1{\times}1$ $\to$ field, heatmap};
-        \node[vio, below=of d](e){source $=\arg\max$};
-        \draw[var](a)--(b); \draw[var](b)--(c); \draw[var](c)--(d); \draw[var](d)--(e);
-      \end{tikzpicture}
-    \end{column}
-  \end{columns}
-\end{frame}
-
 \begin{frame}{PINN --- физический лосс}
   \[ \mathcal{L}_{\text{PDE}} = \lVert R \rVert_2^2 \]
   \vspace{-0.7em}
@@ -395,6 +368,40 @@
      \partial_y f_{i, j} = \frac{f_{i,j+1} - f_{i,j-1}}{2} \]
   \vspace{-0.6em}
   \[ \nabla^2 f_{i, j} = f_{i+1,j} + f_{i-1,j} + f_{i,j+1} + f_{i,j-1} - 4 f_{i,j} \]
+\end{frame}
+
+\begin{frame}{PINN --- архитектура}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.5\textwidth}
+      \textbf{Функция потерь:}
+      \[ \begin{aligned}
+        \mathcal{L}_1 &= \mathcal{L}_{\text{field}} + \mathcal{L}_{\text{heat}} + 0.1\,\mathcal{L}_{\text{PDE}}\\
+        \mathcal{L}_2 &= \mathcal{L}_{\text{field}} + \mathcal{L}_{\text{heat}}
+      \end{aligned} \]
+
+      \vspace{0.4em}
+      \textbf{Ошибка на тесте}:
+      \begin{itemize}
+        \item без сглаживания --- с физ. лоссом \textbf{\mPinnMean}, без \textbf{\mPinnNoPdeMean}
+        \item со сглаживанием --- с физ. лоссом \textbf{\mPinnSmooth}, без \textbf{\mPinnNoPdeSmooth}
+      \end{itemize}
+
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \centering
+      \begin{tikzpicture}[node distance=2.4mm]
+        \node[vio](a){$[C_{t=1}, \dots, C_{t=17}]$ \ ($17{\times}H{\times}W$)};
+        \node[vop, below=of a](b){Conv $3{\times}3$,\ $17\!\to\!64$,\ GELU};
+        \node[vop, below=of b](c){Conv $3{\times}3$,\ $64\!\to\!64$,\ GELU\ ($\times3$)};
+        \node[vop, below=6mm of c, xshift=-1.4cm, text width=2.2cm](hf){Conv $1{\times}1 \to \hat C_{t=0}$};
+        \node[vop, below=6mm of c, xshift=1.4cm, text width=2.2cm](hh){Conv $1{\times}1 \to$ heatmap};
+        \node[vio, below=of hh, text width=2.2cm](e){source $=\arg\max$};
+        \draw[var](a)--(b); \draw[var](b)--(c);
+        \draw[var](c)--(hf); \draw[var](c)--(hh);
+        \draw[var](hh)--(e);
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{PINN --- примеры}
