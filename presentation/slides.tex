@@ -84,7 +84,7 @@
       \toprule
                          & \textbf{Новосибирск} & \textbf{Сахалин} \\
       \midrule
-      Сетка              & $251 \times 201$ & $300 \times 300$ \\
+      Матрица            & $251 \times 201$ & $300 \times 300$ \\
       Ветер (U10, V10)   & нет              & есть \\
       Файлов             & 49               & 15 \\
       Уникальных источников & 10               & 19 \\
@@ -104,7 +104,7 @@
     \item Физический бейзлайн
     \item Transolver
     \item Transolver + heatmap
-    \item Transolver + regression
+    \item Transolver + регрессия
     \item UNet + heatmap
     \item Transolver + heatmap + ветер
     \item PINN
@@ -114,8 +114,8 @@
 \begin{frame}{Функция потерь}
   \textbf{Loss} = взвешенная сумма:
   \begin{itemize}
-    \item \textbf{field} --- реконструкция поля $C_{t=0}$
-    \item \textbf{heatmap} --- spatial softmax, карта вероятности источника
+    \item \textbf{field} --- реконструкция матрицы $C_{t=0}$
+    \item \textbf{heatmap} --- spatial softmax, матрица вероятностей источника
     \item \textbf{coord} --- регрессия $(x, y)$
   \end{itemize}
 
@@ -127,8 +127,13 @@
   \[
     \mathcal{L}_{\text{field}}=\frac{\lVert\hat C-C\rVert_2}{\lVert C\rVert_2},\quad
     \mathcal{L}_{\text{heat}}=\mathrm{KL}(p_{\text{true}}\,\Vert\,p_{\text{pred}}),\quad
-    \mathcal{L}_{\text{coord}}=\lVert\hat{x}-x\rVert_2^2
+    \mathcal{L}_{\text{coord}}=\frac{1}{2}\lVert\hat{x}-x\rVert_2^2
   \]
+\end{frame}
+
+\begin{frame}{Случайный сдвиг источника}
+  \vspace{0.4em}
+  \centering\includegraphics[width=1\textwidth]{demo_augment.png}
 \end{frame}
 
 \section{Бейзлайны}
@@ -208,7 +213,7 @@
       \centering
       \begin{tikzpicture}[node distance=2.4mm]
         \node[vio](a){$[C_{t=1}, \dots, C_{t=17}]$ \ ($17{\times}H{\times}W$)};
-        \node[vbb, below=of a](b){Transolver $\to$ $C_{t=0}$};
+        \node[vbb, below=of a](b){Transolver $\to$ $\hat{C}_{t=0}$};
         \node[vio, below=of b](c){source $=\arg\max$};
         \draw[var](a)--(b); \draw[var](b)--(c);
       \end{tikzpicture}
@@ -219,6 +224,36 @@
 \begin{frame}{Transolver (только поле) --- примеры}
   \vspace{0.4em}
   \centering\includegraphics[width=1\textwidth]{demo_field_only.png}
+\end{frame}
+
+\begin{frame}{Transolver + регрессия --- архитектура}
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{0.5\textwidth}
+      \textbf{Функция потерь:}
+      \[ \mathcal{L} = \mathcal{L}_{\text{field}} + 0.001\,\mathcal{L}_{\text{coord}} \]
+
+      \vspace{0.6em}
+      \textbf{Ошибка на тесте: \mRegMean}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \centering
+      \begin{tikzpicture}[node distance=2.4mm]
+        \node[vio](a){$[C_{t=1}, \dots, C_{t=17}]$ \ ($17{\times}H{\times}W$)};
+        \node[vbb, below=of a](b){Transolver $\to$ $\hat{C}_{t=0}$};
+        \node[vop, below=of b](c){Conv $3{\times}3$,\ $1\!\to\!64$,\ GELU};
+        \node[vop, below=of c](d){Conv $3{\times}3$,\ $64\!\to\!64$,\ GELU\ ($\times2$)};
+        \node[vop, below=of d](e){AdaptiveAvgPool2d(8) $\to$ Linear $128$ $\to$ Linear $2$};
+        \node[vio, below=of e](f){source $=(\hat x, \hat y)$};
+        \draw[var](a)--(b); \draw[var](b)--(c); \draw[var](c)--(d);
+        \draw[var](d)--(e); \draw[var](e)--(f);
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Transolver + регрессия --- примеры}
+  \vspace{0.4em}
+  \centering\includegraphics[width=1\textwidth]{demo_regressor.png}
 \end{frame}
 
 \begin{frame}{Transolver + heatmap --- архитектура}
@@ -238,7 +273,7 @@
       \centering
       \begin{tikzpicture}[node distance=2.4mm]
         \node[vio](a){$[C_{t=1}, \dots, C_{t=17}]$ \ ($17{\times}H{\times}W$)};
-        \node[vbb, below=of a](b){Transolver $\to$ $C_{t=0}$};
+        \node[vbb, below=of a](b){Transolver $\to$ $\hat{C}_{t=0}$};
         \node[vop, below=of b](c){Conv $3{\times}3$,\ $1\!\to\!64$,\ GELU};
         \node[vop, below=of c](d){Conv $3{\times}3$,\ $64\!\to\!64$,\ GELU\ ($\times2$)};
         \node[vop, below=of d](e){Conv $1{\times}1$,\ $64\!\to\!1$};
@@ -254,36 +289,6 @@
 \begin{frame}{Transolver + heatmap --- примеры}
   \vspace{0.4em}
   \centering\includegraphics[width=1\textwidth]{demo_heatmap.png}
-\end{frame}
-
-\begin{frame}{Transolver + regression --- архитектура}
-  \begin{columns}[T,onlytextwidth]
-    \begin{column}{0.5\textwidth}
-      \textbf{Функция потерь:}
-      \[ \mathcal{L} = \mathcal{L}_{\text{field}} + 0.001\,\mathcal{L}_{\text{coord}} \]
-
-      \vspace{0.6em}
-      \textbf{Ошибка на тесте: \mRegMean}
-    \end{column}
-    \begin{column}{0.45\textwidth}
-      \centering
-      \begin{tikzpicture}[node distance=2.4mm]
-        \node[vio](a){$[C_{t=1}, \dots, C_{t=17}]$ \ ($17{\times}H{\times}W$)};
-        \node[vbb, below=of a](b){Transolver $\to$ $C_{t=0}$};
-        \node[vop, below=of b](c){Conv $3{\times}3$,\ $1\!\to\!64$,\ GELU};
-        \node[vop, below=of c](d){Conv $3{\times}3$,\ $64\!\to\!64$,\ GELU\ ($\times2$)};
-        \node[vop, below=of d](e){AdaptiveAvgPool2d(8) $\to$ Linear $128$ $\to$ Linear $2$};
-        \node[vio, below=of e](f){source $=(x,y)$};
-        \draw[var](a)--(b); \draw[var](b)--(c); \draw[var](c)--(d);
-        \draw[var](d)--(e); \draw[var](e)--(f);
-      \end{tikzpicture}
-    \end{column}
-  \end{columns}
-\end{frame}
-
-\begin{frame}{Transolver + regression --- примеры}
-  \vspace{0.4em}
-  \centering\includegraphics[width=1\textwidth]{demo_regressor.png}
 \end{frame}
 
 \begin{frame}{UNet + heatmap --- архитектура}
@@ -303,10 +308,10 @@
       \centering
       \begin{tikzpicture}[node distance=2.4mm]
         \node[vio](a){$[C_{t=1}, \dots, C_{t=17}]$ \ ($17{\times}H{\times}W$)};
-        \node[vop, below=of a](b){Энкодер $32\!\to\!64\!\to\!128$\\(Conv+GN+GELU, pool)};
-        \node[vop, below=of b](c){Bottleneck $256$};
-        \node[vop, below=of c](d){Декодер $128\!\to\!64\!\to\!32$\\(upconv $+$ skip)};
-        \node[vop, below=of d](e){Conv $1{\times}1$ $\to$ heatmap};
+        \node[vop, below=of a](b){Conv $3{\times}3$,\ $32\!\to\!64\!\to\!128$,\ GN+GELU, pool};
+        \node[vop, below=of b](c){Conv $3{\times}3$,\ $128\!\to\!256$,\ GN+GELU};
+        \node[vop, below=of c](d){Conv $3{\times}3$,\ $256\!\to\!128\!\to\!64\!\to\!32$,\ GN+GELU, upconv$+$skip};
+        \node[vop, below=of d](e){Conv $1{\times}1$ $\to$ матрица вероятностей};
         \node[vio, below=of e](f){source $=\arg\max$};
         \draw[var](a)--(b); \draw[var](b)--(c); \draw[var](c)--(d);
         \draw[var](d)--(e); \draw[var](e)--(f);
@@ -339,7 +344,7 @@
       \centering
       \begin{tikzpicture}[node distance=2.4mm]
         \node[vio](a){$C_{t=1, \ldots, 17} + (U, V)_{t=1, \ldots, 17}$ \ ($51{\times}H{\times}W$)};
-        \node[vbb, below=of a](b){Transolver $\to$ $C_{t=0}$};
+        \node[vbb, below=of a](b){Transolver $\to$ $\hat{C}_{t=0}$};
         \node[vop, below=of b](c){Conv $3{\times}3$,\ $1\!\to\!64$,\ GELU};
         \node[vop, below=of c](d){Conv $3{\times}3$,\ $64\!\to\!64$,\ GELU\ ($\times2$)};
         \node[vop, below=of d](e){Conv $1{\times}1$,\ $64\!\to\!1$};
@@ -358,7 +363,7 @@
 \end{frame}
 
 \begin{frame}{PINN --- физический лосс}
-  \[ \mathcal{L}_{\text{PDE}} = \lVert R \rVert_2^2 \]
+  \[ \mathcal{L}_{\text{PDE}} = \frac{1}{H \cdot W} \lVert R \rVert_F^2 \]
   \vspace{-0.7em}
   \[ R = \big(C_{t=1} - \hat{C}_{t=0}\big) + u \odot \partial_x \hat{C}_{t=0}
        + v \odot \partial_y \hat{C}_{t=0} - 0.1\,\nabla^2 \hat{C}_{t=0} \]
@@ -394,7 +399,7 @@
         \node[vop, below=of a](b){Conv $3{\times}3$,\ $17\!\to\!64$,\ GELU};
         \node[vop, below=of b](c){Conv $3{\times}3$,\ $64\!\to\!64$,\ GELU\ ($\times3$)};
         \node[vop, below=6mm of c, xshift=-1.4cm, text width=2.2cm](hf){Conv $1{\times}1 \to \hat C_{t=0}$};
-        \node[vop, below=6mm of c, xshift=1.4cm, text width=2.2cm](hh){Conv $1{\times}1 \to$ heatmap};
+        \node[vop, below=6mm of c, xshift=1.4cm, text width=2.2cm](hh){Conv $1{\times}1 \to$ матрица вероятностей};
         \node[vio, below=of hh, text width=2.2cm](e){source $=\arg\max$};
         \draw[var](a)--(b); \draw[var](b)--(c);
         \draw[var](c)--(hf); \draw[var](c)--(hh);
@@ -449,8 +454,8 @@
   {\scriptsize
     \begin{itemize}
       \item UNet работает лучше, чем Transolver (вероятно, из-за небольшого объема данных)
-      \item Предсказывать карту вероятностей лучше, чем делать регрессию координату
-      \item При наличии ветра и меньшем обьеме данных, можно получить сопоставимый с большим объемом данных результат
+      \item Предсказывать матрицу вероятностей лучше, чем делать регрессию координат
+      \item При наличии ветра и меньшем объёме данных, можно получить сопоставимый с большим объёмом данных результат
     \end{itemize}
   }
 
