@@ -295,7 +295,7 @@
   \begin{columns}[T,onlytextwidth]
     \begin{column}{0.5\textwidth}
       \textbf{Функция потерь:}
-      \[ \mathcal{L} = \mathcal{L}_{\text{heat}} \]
+      \[ \mathcal{L} = \mathcal{L}_{\text{field}} + \mathcal{L}_{\text{heat}} \]
 
       \vspace{0.6em}
       \textbf{Ошибка на тесте:}
@@ -308,13 +308,14 @@
       \centering
       \begin{tikzpicture}[node distance=2.4mm]
         \node[vio](a){$[C_{t=1}, \dots, C_{t=17}]$ \ ($17{\times}H{\times}W$)};
-        \node[vop, below=of a](b){Conv $3{\times}3$,\ $32\!\to\!64\!\to\!128$,\ GN+GELU, pool};
-        \node[vop, below=of b](c){Conv $3{\times}3$,\ $128\!\to\!256$,\ GN+GELU};
-        \node[vop, below=of c](d){Conv $3{\times}3$,\ $256\!\to\!128\!\to\!64\!\to\!32$,\ GN+GELU, upconv$+$skip};
-        \node[vop, below=of d](e){Conv $1{\times}1$ $\to$ матрица вероятностей};
-        \node[vio, below=of e](f){source $=\arg\max$};
-        \draw[var](a)--(b); \draw[var](b)--(c); \draw[var](c)--(d);
-        \draw[var](d)--(e); \draw[var](e)--(f);
+        \node[vop, below=of a](b){Conv $3{\times}3$,\ $32\!\to\!64\!\to\!128\!\to\!256$,\ GN+GELU, pool};
+        \node[vop, below=of b](c){Conv $3{\times}3$,\ $256\!\to\!128\!\to\!64\!\to\!32$,\ GN+GELU, upconv$+$skip};
+        \node[vop, below=6mm of c, xshift=-1.4cm, text width=2.2cm](hf){Conv $1{\times}1 \to \hat C_{t=0}$};
+        \node[vop, below=6mm of c, xshift=1.4cm, text width=2.2cm](hh){Conv $1{\times}1 \to$ матрица вероятностей};
+        \node[vio, below=of hh, text width=2.2cm](e){source $=\arg\max$};
+        \draw[var](a)--(b); \draw[var](b)--(c);
+        \draw[var](c)--(hf); \draw[var](c)--(hh);
+        \draw[var](hh)--(e);
       \end{tikzpicture}
     \end{column}
   \end{columns}
