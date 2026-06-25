@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "source-finding-problem"
+version = "0.1.0"
+description = ""
+authors = ["Вячеслав Чертан <slavakemdev@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12, <3.15"
+torch = "^2.10.0"
+torchaudio = "^2.10.0"
+torchvision = "^0.25.0"
+pandas = "^3.0.1"
+xarray = "^2026.2.0"
+tqdm = "^4.67.3"
+matplotlib = "^3.10.8"
+scipy = "^1.17.1"
+netcdf4 = "^1.7.4"
+h5netcdf = "^1.8.1"
+timm = "^1.0.26"
+einops = "^0.8.2"
+comet-ml = "^3.57.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
